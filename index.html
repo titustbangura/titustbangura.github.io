@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Titus | Software Engineer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Titus T. Bangura, Diploma Software Engineering Student. Hire me for your next project!">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+ <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+</head>
+<body data-theme="light">
+
+  <!-- Quick Page Loader (1 second) -->
+  <div id="preloader">
+    <div class="loader"></div>
+    <div class="loader-text">Loading portfolio...</div>
+  </div>
+
+  <!-- 3D Floating Particles Animation Background -->
+  <div id="particles-background">
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+  <!-- Mouse Follower Effect -->
+  <div id="cursor-follower"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- Enhanced Navbar with Progress Indicator - Fixed Position -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar"></div>
+    
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <span class="brand-icon">
+          <i class="fa-solid fa-code"></i>
+        </span>
+        <span class="brand-text">Portfolio</span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <i class="nav-icon fa-solid fa-home"></i>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#stats">
+              <i class="nav-icon fa-solid fa-chart-bar"></i>
+              <span class="nav-text">Stats</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">
+              <i class="nav-icon fa-solid fa-folder-open"></i>
+              <span class="nav-text">Projects</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">
+              <i class="nav-icon fa-solid fa-code"></i>
+              <span class="nav-text">Skills</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#experience">
+              <i class="nav-icon fa-solid fa-briefcase"></i>
+              <span class="nav-text">Experience</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">
+              <i class="nav-icon fa-solid fa-cogs"></i>
+              <span class="nav-text">Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#blog">
+              <i class="nav-icon fa-solid fa-blog"></i>
+              <span class="nav-text">Blog</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#certs">
+              <i class="nav-icon fa-solid fa-certificate"></i>
+              <span class="nav-text">Certificates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">
+              <i class="nav-icon fa-solid fa-user"></i>
+              <span class="nav-text">About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">
+              <i class="nav-icon fa-solid fa-envelope"></i>
+              <span class="nav-text">Contact</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <button id="darkModeToggle" class="btn nav-link py-1 px-2 theme-toggle" title="Toggle dark mode" type="button">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="btn btn-primary rounded-circle shadow" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Hero Section (Parallax) -->
+  <section class="hero-section parallax-bg text-center py-5">
+    <div class="container">
+      <img src="WhatsApp_Image_2025-05-22_at_09.29.08_70576e04-removebg-preview.png" alt="Titus T. Bangura" class="rounded-circle shadow-lg mb-3 hero-img animate-hero-img">
+      <h1 class="display-4 fw-bold animate-hero-title">Hi, I'm Titus T. Bangura</h1>
+      <p class="lead animate-hero-text">
+        <span id="typewriter" class="typewriter-text"></span>
+        <span class="cursor">|</span>
+      </p>
+      <p class="animate-hero-text">I build modern websites, apps &amp; solutions.<br>Let's work together!</p>
+      <a href="#contact" class="btn btn-light btn-lg animate-hero-btn me-2"><i class="fa-solid fa-handshake"></i> Hire Me</a>
+      <a href="#projects" class="btn btn-outline-light btn-lg animate-hero-btn"><i class="fa-solid fa-code"></i> My Work</a>
+      <a href="resume.html" class="btn btn-outline-warning btn-lg animate-hero-btn ms-2" target="_blank"><i class="fa-solid fa-file-text"></i> View Resume</a>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Stats Counter Section -->
+  <section class="container py-5" id="stats">
+    <div class="row text-center">
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card pulse-animation">
+          <div class="stat-icon"><i class="fa-solid fa-rocket"></i></div>
+          <div class="stat-number" data-target="15">0</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card pulse-animation">
+          <div class="stat-icon"><i class="fa-solid fa-heart"></i></div>
+          <div class="stat-number" data-target="5">0</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card pulse-animation">
+          <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+          <div class="stat-number" data-target="3">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="stat-card pulse-animation">
+          <div class="stat-icon"><i class="fa-solid fa-code-branch"></i></div>
+          <div class="stat-number" data-target="8">0</div>
+          <div class="stat-label">Technologies</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Projects Section with Filter -->
+  <section class="container py-5" id="projects">
+    <h2 class="text-center fw-bold mb-4 section-title">My Projects</h2>
+    
+    <!-- Project Filter -->
+    <div class="project-filter text-center mb-4">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="web">Web Development</button>
+      <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+      <button class="filter-btn" data-filter="backend">Backend</button>
+    </div>
+    
+    <div class="row g-4" id="projectsContainer">
+      <!-- Project Card 1 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=E-commerce+Website" class="card-img-top" alt="E-commerce Website">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
+            <h5 class="card-title">E-commerce Website</h5>
+            <p class="card-text">A full-featured online store built with React, PHP, and MySQL. Includes search, user accounts, and admin panel.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Card 2 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=Portfolio+Website" class="card-img-top" alt="Portfolio Website">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <h5 class="card-title">Personal Portfolio</h5>
+            <p class="card-text">A modern, animated portfolio website to showcase my skills and projects. Built with HTML, CSS, JS, and Bootstrap.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Card 3 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="backend">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=Student+Management+App" class="card-img-top" alt="Student Management App">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">SQLite</span>
+            </div>
+            <h5 class="card-title">Student Management App</h5>
+            <p class="card-text">A web app for managing student data, attendance, and grades. Built using Python (Flask) and Bootstrap.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Card 4 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="mobile">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=Mobile+Todo+App" class="card-img-top" alt="Mobile Todo App">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">Firebase</span>
+            </div>
+            <h5 class="card-title">Mobile Todo App</h5>
+            <p class="card-text">A cross-platform mobile application for task management with real-time sync and offline support.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Card 5 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=Weather+App" class="card-img-top" alt="Weather App">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">API</span>
+              <span class="tech-tag">CSS3</span>
+            </div>
+            <h5 class="card-title">Weather App</h5>
+            <p class="card-text">A responsive weather application that provides real-time weather data using external APIs.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Card 6 -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="backend">
+        <div class="card project-card h-100 shadow">
+          <img src="https://via.placeholder.com/400x200?text=REST+API" class="card-img-top" alt="REST API">
+          <div class="card-body">
+            <div class="project-tech mb-2">
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
+            <h5 class="card-title">RESTful API</h5>
+            <p class="card-text">A comprehensive REST API with authentication, CRUD operations, and comprehensive documentation.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Enhanced Skills Section with Progress Bars -->
+  <section class="container py-5" id="skills">
+    <h2 class="text-center fw-bold mb-4 section-title">Technical Skills</h2>
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <h4 class="mb-3">Frontend Development</h4>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>HTML5 & CSS3</span>
+            <span class="skill-percentage">95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="95"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>JavaScript</span>
+            <span class="skill-percentage">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="90"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>React.js</span>
+            <span class="skill-percentage">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="85"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>Bootstrap</span>
+            <span class="skill-percentage">92%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="92"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <h4 class="mb-3">Backend & Database</h4>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>Python</span>
+            <span class="skill-percentage">88%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="88"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>PHP</span>
+            <span class="skill-percentage">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="85"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>MySQL</span>
+            <span class="skill-percentage">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="80"></div>
+          </div>
+        </div>
+        <div class="skill-item mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span>Git & GitHub</span>
+            <span class="skill-percentage">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-skill="90"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Technology Icons -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-10">
+        <div class="row text-center">
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+              <div>HTML5</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+              <div>CSS3</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+              <div>JavaScript</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
+              <div>React</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-php"></i></div>
+              <div>PHP</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
+              <div>Databases</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+              <div>Python</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div class="tech-icon-card">
+              <div class="skill-icon"><i class="fa-brands fa-git-alt"></i></div>
+              <div>Git</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Experience Timeline -->
+  <section class="container py-5" id="experience">
+    <h2 class="text-center fw-bold mb-4 section-title">Experience & Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h5 class="timeline-title">Diploma in Software Engineering</h5>
+          <div class="timeline-meta">Sky Visione College • 2022 - 2025</div>
+          <p class="timeline-description">Comprehensive program covering full-stack development, software engineering principles, and modern web technologies. Gained hands-on experience in multiple programming languages and frameworks.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h5 class="timeline-title">Freelance Web Developer</h5>
+          <div class="timeline-meta">Self-Employed • 2023 - Present</div>
+          <p class="timeline-description">Building custom websites and web applications for small businesses and startups across Sierra Leone. Specialized in responsive design and modern web technologies.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h5 class="timeline-title">Frontend Developer Intern</h5>
+          <div class="timeline-meta">Local Tech Company • Summer 2023</div>
+          <p class="timeline-description">Assisted in developing responsive web interfaces and collaborated with senior developers on various client projects. Gained experience in team collaboration and agile development.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h5 class="timeline-title">Web Development Bootcamp</h5>
+          <div class="timeline-meta">Online Learning • 2022</div>
+          <p class="timeline-description">Completed intensive web development bootcamp covering HTML, CSS, JavaScript, and popular frameworks. Built multiple projects and gained foundational programming skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Services Section -->
+  <section class="container py-5" id="services">
+    <h2 class="text-center fw-bold mb-4 section-title">Services I Offer</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h5 class="service-title">Web Development</h5>
+          <p class="service-description">Custom websites and web applications built with modern technologies like React, PHP, and MySQL.</p>
+          <ul class="service-features">
+            <li>Responsive Design</li>
+            <li>SEO Optimization</li>
+            <li>Performance Focused</li>
+            <li>Cross-browser Compatible</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-mobile-alt"></i>
+          </div>
+          <h5 class="service-title">Mobile App Development</h5>
+          <p class="service-description">Cross-platform mobile applications using React Native and modern development practices.</p>
+          <ul class="service-features">
+            <li>iOS & Android</li>
+            <li>Native Performance</li>
+            <li>User-Friendly UI</li>
+            <li>Real-time Features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-server"></i>
+          </div>
+          <h5 class="service-title">Backend Development</h5>
+          <p class="service-description">Robust backend systems with RESTful APIs, database design, and server deployment using PHP and MySQL.</p>
+          <ul class="service-features">
+            <li>API Development</li>
+            <li>Database Design</li>
+            <li>Cloud Deployment</li>
+            <li>Security Best Practices</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-paint-brush"></i>
+          </div>
+          <h5 class="service-title">UI/UX Design</h5>
+          <p class="service-description">Modern and intuitive user interface designs that provide excellent user experience.</p>
+          <ul class="service-features">
+            <li>User Research</li>
+            <li>Wireframing</li>
+            <li>Prototyping</li>
+            <li>Design Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-tools"></i>
+          </div>
+          <h5 class="service-title">Website Maintenance</h5>
+          <p class="service-description">Ongoing website maintenance, updates, security monitoring, and performance optimization.</p>
+          <ul class="service-features">
+            <li>Regular Updates</li>
+            <li>Security Monitoring</li>
+            <li>Performance Optimization</li>
+            <li>Bug Fixes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card h-100">
+          <div class="service-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h5 class="service-title">Tech Consulting</h5>
+          <p class="service-description">Technology consulting and mentoring for individuals and small businesses looking to grow digitally.</p>
+          <ul class="service-features">
+            <li>Technology Strategy</li>
+            <li>Code Reviews</li>
+            <li>Training & Mentoring</li>
+            <li>Best Practices</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Blog Section -->
+  <section class="container py-5" id="blog">
+    <h2 class="text-center fw-bold mb-4 section-title">Latest Blog Posts</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=React+Tutorial" alt="Getting Started with React">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Dec 15, 2024</span>
+              <span class="blog-category">React</span>
+            </div>
+            <h5 class="blog-title">Getting Started with React: A Beginner's Guide</h5>
+            <p class="blog-excerpt">Learn the fundamentals of React and start building your first component-based applications with this comprehensive guide...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=CSS+Grid" alt="Modern CSS Techniques">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Nov 28, 2024</span>
+              <span class="blog-category">CSS</span>
+            </div>
+            <h5 class="blog-title">Modern CSS Techniques for Better Layouts</h5>
+            <p class="blog-excerpt">Discover CSS Grid, Flexbox, and other modern techniques to create stunning and responsive layouts that work across all devices...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=Python+Web+Dev" alt="Python for Web Development">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Nov 10, 2024</span>
+              <span class="blog-category">Python</span>
+            </div>
+            <h5 class="blog-title">Python for Web Development: Flask vs Django</h5>
+            <p class="blog-excerpt">A comprehensive comparison of Flask and Django frameworks for web development, helping you choose the right tool for your project...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=JavaScript+ES6" alt="JavaScript ES6 Features">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Oct 25, 2024</span>
+              <span class="blog-category">JavaScript</span>
+            </div>
+            <h5 class="blog-title">Essential JavaScript ES6 Features Every Developer Should Know</h5>
+            <p class="blog-excerpt">Explore the most important ES6 features that will make your JavaScript code more efficient and modern...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=Git+Workflow" alt="Git Best Practices">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Oct 12, 2024</span>
+              <span class="blog-category">Git</span>
+            </div>
+            <h5 class="blog-title">Git Best Practices for Team Collaboration</h5>
+            <p class="blog-excerpt">Learn essential Git workflows and best practices that will improve your team's collaboration and code management...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="https://via.placeholder.com/400x200?text=Web+Performance" alt="Web Performance Optimization">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-date">Sep 30, 2024</span>
+              <span class="blog-category">Performance</span>
+            </div>
+            <h5 class="blog-title">Web Performance Optimization: Speed Up Your Website</h5>
+            <p class="blog-excerpt">Practical tips and techniques to improve your website's loading speed and overall performance for better user experience...</p>
+            <a href="#" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Custom Certificates Section -->
+  <section class="container py-5" id="certs">
+    <h2 class="text-center fw-bold mb-4 section-title">Certificates &amp; Awards</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card cert-card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Meta Front-End Developer</h5>
+            <div class="text-muted small mb-2">Coursera &bull; 2024</div>
+            <p class="mb-2">Completed Meta's rigorous front-end developer program, mastering React, JavaScript, and UI design principles.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card cert-card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Python for Everybody</h5>
+            <div class="text-muted small mb-2">University of Michigan • 2023</div>
+            <p class="mb-2">Earned a certificate for excellence in Python programming, data structures, and web scraping techniques.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card cert-card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">JavaScript Algorithms and Data Structures</h5>
+            <div class="text-muted small mb-2">freeCodeCamp • 2023</div>
+            <p class="mb-2">Comprehensive course covering JavaScript fundamentals, ES6, and algorithmic thinking for problem-solving.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Testimonials Section -->
+  <section class="container py-5" id="testimonials">
+    <h2 class="text-center fw-bold mb-4 section-title">What Clients Say</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card testimonial-card shadow">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://via.placeholder.com/55x55?text=JD" class="rounded-circle me-3" style="width:55px;height:55px;object-fit:cover;">
+              <div>
+                <div class="fw-bold">Jane Doe</div>
+                <div class="text-muted small">Project Manager</div>
+              </div>
+            </div>
+            <p class="mb-0">"Titus is a talented and reliable developer. The website was delivered on time and exceeded our expectations! Highly professional work."</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card testimonial-card shadow">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://via.placeholder.com/55x55?text=AS" class="rounded-circle me-3" style="width:55px;height:55px;object-fit:cover;">
+              <div>
+                <div class="fw-bold">Alex Smith</div>
+                <div class="text-muted small">Startup Founder</div>
+              </div>
+            </div>
+            <p class="mb-0">"Great communication and top-notch coding skills. Titus delivered exactly what we needed for our startup. Highly recommend!"</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card testimonial-card shadow">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://via.placeholder.com/55x55?text=MJ" class="rounded-circle me-3" style="width:55px;height:55px;object-fit:cover;">
+              <div>
+                <div class="fw-bold">Maria Johnson</div>
+                <div class="text-muted small">Business Owner</div>
+              </div>
+            </div>
+            <p class="mb-0">"Working with Titus was a pleasure. He understood our requirements perfectly and delivered a beautiful, functional website."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- About Me Section -->
+  <section class="container py-5" id="about">
+    <h2 class="text-center fw-bold mb-4 section-title">About Me</h2>
+    <div class="about-card mx-auto position-relative">
+      <!-- Decorative SVG blob -->
+      <svg class="about-blob" width="320" height="180" viewBox="0 0 320 180" fill="none"><ellipse cx="160" cy="90" rx="160" ry="90" fill="#3461ff0c"/></svg>
+      <!-- Animated Profile Picture -->
+      <img src="WhatsApp_Image_2025-05-22_at_09.29.08_70576e04-removebg-preview.png" class="about-photo" alt="Titus T. Bangura">
+      <!-- Name and Role -->
+      <div class="about-content">
+        <h3 class="about-name">Titus T. Bangura</h3>
+        <div class="about-role mb-2"><i class="fa-solid fa-laptop-code me-1"></i> Diploma Software Engineer</div>
+    
+        <div class="about-details">
+          <p>
+            I'm a passionate Diploma Software Engineering student from Sierra Leone, Freetown. 
+            I love building things that solve real-world problems using code. 
+            My journey started with curiosity and a love for technology, and now I have hands-on experience in web, mobile, and backend development.
+          </p>
+          <p>
+            I'm always eager to learn new technologies and contribute to exciting projects. 
+            If you want a hardworking, creative, and reliable developer for your team or project, let's connect!
+          </p>
+          <ul class="list-unstyled mb-2">
+            <li><b>Email:</b> <a href="mailto:tbanguratitus@gmail.com">tbanguratitus@gmail.com</a></li>
+            <li><b>Location:</b> Freetown, Sierra Leone</li>
+            <li><b>School:</b> Sky Visione College</li>
+            <li><b>Status:</b> Available for freelance work</li>
+          </ul>
+          <div class="about-socials">
+            <a href="https://github.com/Monday4we" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/titus-bangura" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:tbanguratitus@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://twitter.com/titusbangura" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><i class="fa-solid fa-star"></i></div>
+
+  <!-- Contact Section -->
+  <section class="container py-5" id="contact">
+    <h2 class="text-center fw-bold mb-4 section-title">Get In Touch</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="card shadow p-4 h-100 contact-info-card">
+              <div class="contact-header mb-4">
+                <div class="country-flag-container">
+                  <div class="flag-sierra-leone">
+                    <div class="flag-stripe green"></div>
+                    <div class="flag-stripe white"></div>
+                    <div class="flag-stripe blue"></div>
+                  </div>
+                  <div class="flag-wave-effect"></div>
+                </div>
+                <h5 class="mb-0 contact-title">Contact Information</h5>
+                <p class="text-muted small mb-0">🇸🇱 Based in Sierra Leone</p>
+              </div>
+              <div class="contact-info">
+                <div class="contact-item mb-3" data-animation-delay="0.1s">
+                  <div class="contact-icon-wrapper">
+                    <i class="fa-solid fa-envelope contact-icon"></i>
+                  </div>
+                  <div class="contact-details">
+                    <strong class="contact-label">Email</strong>
+                    <a href="mailto:tbanguratitus@gmail.com" class="contact-link">tbanguratitus@gmail.com</a>
+                  </div>
+                </div>
+                <div class="contact-item mb-3" data-animation-delay="0.2s">
+                  <div class="contact-icon-wrapper">
+                    <i class="fa-solid fa-phone contact-icon"></i>
+                  </div>
+                  <div class="contact-details">
+                    <strong class="contact-label">Phone</strong>
+                    <a href="tel:+23288887850" class="contact-link">+232 88 887 850</a>
+                  </div>
+                </div>
+                <div class="contact-item mb-3" data-animation-delay="0.3s">
+                  <div class="contact-icon-wrapper">
+                    <i class="fa-solid fa-location-dot contact-icon"></i>
+                  </div>
+                  <div class="contact-details">
+                    <strong class="contact-label">Location</strong>
+                    <span class="contact-value">Freetown, Sierra Leone</span>
+                  </div>
+                </div>
+                <div class="contact-item mb-3" data-animation-delay="0.4s">
+                  <div class="contact-icon-wrapper">
+                    <i class="fa-solid fa-globe contact-icon"></i>
+                  </div>
+                  <div class="contact-details">
+                    <strong class="contact-label">Timezone</strong>
+                    <span class="contact-value">GMT (UTC+0)</span>
+                  </div>
+                </div>
+                <div class="contact-item" data-animation-delay="0.5s">
+                  <div class="contact-icon-wrapper">
+                    <i class="fa-solid fa-clock contact-icon"></i>
+                  </div>
+                  <div class="contact-details">
+                    <strong class="contact-label">Response Time</strong>
+                    <span class="contact-value">Usually within 24 hours</span>
+                  </div>
+                </div>
+              </div>
+              <div class="contact-status mt-4">
+                <div class="status-indicator">
+                  <div class="status-dot"></div>
+                  <span class="status-text">Available for new projects</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="card shadow p-4">
+              <h5 class="mb-3">Send Message</h5>
+              <form id="contactForm" action="https://formspree.io/f/mwpqdlzp" method="POST">
+                <div class="mb-3">
+                  <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+                <div class="mb-3">
+                  <textarea class="form-control" rows="4" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <input type="hidden" name="_subject" value="New Contact Form Message from Portfolio">
+                <input type="hidden" name="_replyto" value="tbanguratitus@gmail.com">
+                <input type="hidden" name="_next" value="#contact">
+                <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+                  <i class="fa-solid fa-paper-plane me-2"></i>Send Message
+                </button>
+                <div class="form-text mt-2" id="formStatus"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-2">&copy; <span id="year"></span> Titus T. Bangura. All rights reserved.</p>
+          <p class="small mb-0">Built with ❤️ using HTML, CSS, JavaScript & Bootstrap</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="social-links">
+            <a href="https://github.com/titustbangura" target="_blank" class="text-light me-3" title="GitHub">
+              <i class="fa-brands fa-github fa-lg"></i>
+            </a>
+            <a href="https://linkedin.com/in/titus-bangura" target="_blank" class="text-light me-3" title="LinkedIn">
+              <i class="fa-brands fa-linkedin fa-lg"></i>
+            </a>
+            <a href="mailto:tbanguratitus@gmail.com" class="text-light me-3" title="Email">
+              <i class="fa-solid fa-envelope fa-lg"></i>
+            </a>
+            <a href="https://twitter.com/titusbangura" target="_blank" class="text-light" title="Twitter">
+              <i class="fa-brands fa-twitter fa-lg"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script> 
+    // Quick 1-second preloader
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.style.opacity = "0";
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 300);
+        }
+      }, 1000); // 1 second delay
+    });
+
+    // Footer Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Stats Counter Animation
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 100;
+      const timer = setInterval(() => {
+        current += increment;
+        element.textContent = Math.floor(current);
+        if (current >= target) {
+          element.textContent = target;
+          clearInterval(timer);
+        }
+      }, 20);
+    }
+
+    // Intersection Observer for Stats
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumbers = entry.target.querySelectorAll('.stat-number');
+          statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            animateCounter(stat, target);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) {
+      statsObserver.observe(statsSection);
+    }
+
+    // Skills Progress Bar Animation
+    const skillsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progressBars = entry.target.querySelectorAll('.skill-progress');
+          progressBars.forEach(bar => {
+            const skill = bar.getAttribute('data-skill');
+            setTimeout(() => {
+              bar.style.width = skill + '%';
+            }, 200);
+          });
+          skillsObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    const skillsSection = document.getElementById('skills');
+    if (skillsSection) {
+      skillsObserver.observe(skillsSection);
+    }
+
+    // Project Filter Functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filter = button.getAttribute('data-filter');
+        
+        projectItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Timeline Animation
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      timelineObserver.observe(item);
+    });
+
+    // Service Cards Animation
+    const serviceObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      serviceObserver.observe(card);
+    });
+
+    // Blog Cards Animation
+    const blogObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      blogObserver.observe(card);
+    });
+
+    // Contact Form Handler
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('submitBtn');
+      const formStatus = document.getElementById('formStatus');
+      
+      // Show loading state
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Sending...';
+      submitBtn.disabled = true;
+      formStatus.textContent = '';
+      formStatus.className = 'form-text mt-2';
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          formStatus.textContent = "Thank you! Your message has been sent successfully. I'll get back to you soon!";
+          formStatus.className = 'form-text mt-2 text-success';
+          form.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        formStatus.textContent = "Sorry, there was an error sending your message. Please try again or email me directly at tbanguratitus@gmail.com";
+        formStatus.className = 'form-text mt-2 text-danger';
+      }
+      
+      // Reset button
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>Send Message';
+      submitBtn.disabled = false;
+      
+      // Clear status message after 8 seconds
+      setTimeout(() => {
+        formStatus.textContent = "";
+      }, 8000);
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    backToTop.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+
+    // Dark Mode Toggle in Navbar
+    const dmBtn = document.getElementById('darkModeToggle');
+    dmBtn.onclick = () => {
+      const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('portfolio-theme', theme);
+      dmBtn.innerHTML = theme === 'dark'
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+    };
+    (function(){
+      const t = localStorage.getItem('portfolio-theme') || 'light';
+      document.body.setAttribute('data-theme', t);
+      dmBtn.innerHTML = t === 'dark'
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+    })();
+
+    // Enhanced Navbar Features - Fixed Position
+    const navbar = document.querySelector('.navbar');
+    const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+    
+    // Scroll Progress Bar & Static Effects
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      // Update progress bar only
+      if (scrollProgressBar) {
+        scrollProgressBar.style.width = scrollPercent + '%';
+      }
+      
+      // Back to top button
+      const backToTop = document.getElementById('backToTop');
+      if (backToTop) {
+        backToTop.style.display = scrollTop > 300 ? 'block' : 'none';
+      }
+      
+      // Home section detection
+      if (scrollTop < 100) {
+        updateActiveNavLink('#');
+      }
+      
+      // Parallax effect
+      const hero = document.querySelector('.parallax-bg');
+      if(hero) {
+        let offset = scrollTop * 0.3;
+        hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      }
+    });
+
+    // Enhanced Smooth scroll for nav links with active state management
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    // Function to update active nav link
+    function updateActiveNavLink(targetId) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === targetId || 
+            (targetId === '#' && link.getAttribute('href') === '#')) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    // Click handler for nav links with enhanced animations
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if(href && href.startsWith('#')){
+          e.preventDefault();
+          
+          // Update active state immediately
+          updateActiveNavLink(href);
+          
+          // Add click animation
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+          
+          if(href === '#') {
+            // Scroll to top for home
+            window.scrollTo({top: 0, behavior: 'smooth'});
+          } else if(document.querySelector(href)) {
+            // Scroll to section with offset for navbar
+            const targetSection = document.querySelector(href);
+            const navbarHeight = navbar.offsetHeight;
+            const targetPosition = targetSection.offsetTop - navbarHeight - 20;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+          
+          // Auto-collapse mobile menu
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+          }
+        }
+      });
+    });
+    
+    // Intersection Observer to update active nav link based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          const sectionId = '#' + entry.target.id;
+          updateActiveNavLink(sectionId);
+        }
+      });
+    }, { 
+      threshold: [0.3],
+      rootMargin: '-80px 0px -80px 0px'
+    });
+    
+    // Observe all sections
+    sections.forEach(section => {
+      navObserver.observe(section);
+    });
+
+    // Enhanced Contact Item Animations
+    document.querySelectorAll('.contact-item').forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(-20px)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+
+    const contactObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.contact-item');
+          items.forEach((item, index) => {
+            const delay = parseFloat(item.getAttribute('data-animation-delay') || '0') * 1000;
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'translateX(0)';
+            }, delay);
+          });
+          
+          // Animate flag
+          const flag = entry.target.querySelector('.flag-sierra-leone');
+          if (flag) {
+            setTimeout(() => {
+              flag.style.animation = 'flagWave 3s ease-in-out infinite, flagEntrance 1s ease-out';
+            }, 200);
+          }
+          
+          // Animate status indicator
+          const statusDot = entry.target.querySelector('.status-dot');
+          if (statusDot) {
+            setTimeout(() => {
+              statusDot.style.animation = 'statusPulse 2s ease-in-out infinite';
+            }, 800);
+          }
+          
+          contactObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactObserver.observe(contactSection);
+    }
+
+    // 3D Floating Particles Animation Background
+    class Particle3D {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.z = Math.random() * 1000;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.vz = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 3 + 1;
+        this.opacity = Math.random() * 0.6 + 0.2;
+        this.rotationX = Math.random() * Math.PI * 2;
+        this.rotationY = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        this.color = this.getRandomColor();
+        this.connections = [];
+      }
+
+      getRandomColor() {
+        const colors = [
+          'rgba(79, 172, 254, ',
+          'rgba(96, 165, 250, ',
+          'rgba(139, 92, 246, ',
+          'rgba(236, 72, 153, ',
+          'rgba(251, 146, 60, ',
+          'rgba(34, 197, 94, '
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      update(canvas, mouse) {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.z += this.vz;
+
+        // Mouse interaction
+        if (mouse.x && mouse.y) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 150) {
+            const force = (150 - distance) / 150;
+            this.vx += dx * force * 0.0001;
+            this.vy += dy * force * 0.0001;
+          }
+        }
+
+        // Rotation
+        this.rotationX += this.rotationSpeed;
+        this.rotationY += this.rotationSpeed * 0.7;
+
+        // Boundaries
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        if (this.z < 0 || this.z > 1000) this.vz *= -1;
+
+        // Keep in bounds
+        this.x = Math.max(0, Math.min(canvas.width, this.x));
+        this.y = Math.max(0, Math.min(canvas.height, this.y));
+        this.z = Math.max(0, Math.min(1000, this.z));
+      }
+
+      draw(ctx) {
+        const scale = 1000 / (1000 - this.z);
+        const x2d = this.x;
+        const y2d = this.y;
+        const size2d = this.size * scale;
+
+        ctx.save();
+        ctx.translate(x2d, y2d);
+        ctx.rotate(this.rotationX);
+        
+        // Draw 3D-looking particle
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, size2d);
+        gradient.addColorStop(0, this.color + (this.opacity * scale) + ')');
+        gradient.addColorStop(0.5, this.color + (this.opacity * scale * 0.5) + ')');
+        gradient.addColorStop(1, this.color + '0)');
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(0, 0, size2d, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Add inner glow
+        ctx.fillStyle = this.color + (this.opacity * scale * 0.8) + ')';
+        ctx.beginPath();
+        ctx.arc(0, 0, size2d * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      drawConnections(ctx, particles) {
+        particles.forEach(particle => {
+          if (particle === this) return;
+          
+          const dx = particle.x - this.x;
+          const dy = particle.y - this.y;
+          const dz = particle.z - this.z;
+          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          
+          if (distance < 120) {
+            const opacity = (120 - distance) / 120 * 0.2;
+            ctx.strokeStyle = `rgba(79, 172, 254, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(particle.x, particle.y);
+            ctx.stroke();
+          }
+        });
+      }
+    }
+
+    class ParticleSystem3D {
+      constructor() {
+        this.canvas = document.getElementById('particles-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.mouse = { x: null, y: null };
+        this.animationId = null;
+
+        this.init();
+        this.bindEvents();
+        this.animate();
+      }
+
+      init() {
+        this.resizeCanvas();
+        this.createParticles();
+      }
+
+      resizeCanvas() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      createParticles() {
+        const particleCount = Math.min(80, Math.floor((this.canvas.width * this.canvas.height) / 15000));
+        this.particles = [];
+        
+        for (let i = 0; i < particleCount; i++) {
+          this.particles.push(new Particle3D(this.canvas));
+        }
+      }
+
+      bindEvents() {
+        window.addEventListener('resize', () => {
+          this.resizeCanvas();
+          this.createParticles();
+        });
+
+        this.canvas.addEventListener('mousemove', (e) => {
+          this.mouse.x = e.clientX;
+          this.mouse.y = e.clientY;
+        });
+
+        this.canvas.addEventListener('mouseleave', () => {
+          this.mouse.x = null;
+          this.mouse.y = null;
+        });
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Update and draw connections first
+        this.particles.forEach(particle => {
+          particle.drawConnections(this.ctx, this.particles);
+        });
+
+        // Update and draw particles
+        this.particles.forEach(particle => {
+          particle.update(this.canvas, this.mouse);
+          particle.draw(this.ctx);
+        });
+
+        this.animationId = requestAnimationFrame(() => this.animate());
+      }
+
+      destroy() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+      }
+    }
+
+    // Initialize particles system after page load
+    let particleSystem3D;
+    
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (document.getElementById('particles-canvas')) {
+          particleSystem3D = new ParticleSystem3D();
+        }
+      }, 1100); // Start after loader finishes
+    });
+
+    // ========================================
+    // 🎉 SURPRISE FEATURES JAVASCRIPT 🎉
+    // ========================================
+
+    // 1. Typewriter Effect
+    const typewriterTexts = [
+      "Diploma Software Engineering Student",
+      "Full-Stack Web Developer",
+      "Problem Solver & Innovator",
+      "Your Next Developer 🚀"
+    ];
+    
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typewriter() {
+      const typewriterElement = document.getElementById('typewriter');
+      const currentText = typewriterTexts[textIndex];
+      
+      if (isDeleting) {
+        typewriterElement.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      let typeSpeed = isDeleting ? 50 : 100;
+      
+      if (!isDeleting && charIndex === currentText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % typewriterTexts.length;
+        typeSpeed = 500;
+      }
+      
+      setTimeout(typewriter, typeSpeed);
+    }
+    
+    // Start typewriter after page loads
+    setTimeout(typewriter, 2000);
+
+    // 2. Mouse Follower Effect
+    const cursorFollower = document.getElementById('cursor-follower');
+    const cursorDot = document.getElementById('cursor-dot');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+      cursorDot.style.opacity = '1';
+      cursorFollower.style.opacity = '1';
+    });
+    
+    function animateFollower() {
+      followerX += (mouseX - followerX) * 0.1;
+      followerY += (mouseY - followerY) * 0.1;
+      
+      cursorFollower.style.left = followerX + 'px';
+      cursorFollower.style.top = followerY + 'px';
+      
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    
+    // Enhanced cursor on hover
+    document.querySelectorAll('a, button, .nav-link, .btn').forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorFollower.style.background = 'rgba(52, 97, 255, 0.1)';
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.background = 'transparent';
+      });
+    });
+
+    // 3. Secret Easter Egg - Fireworks & Matrix Effect
+    const secretButton = document.getElementById('secretButton');
+    let matrixActive = false;
+    
+    secretButton.addEventListener('click', () => {
+      if (!matrixActive) {
+        triggerFireworks();
+        setTimeout(() => {
+          startMatrixRain();
+          showEasterEggMessage();
+        }, 1000);
+      } else {
+        stopMatrixRain();
+        showNormalMessage();
+      }
+      matrixActive = !matrixActive;
+    });
+    
+    function triggerFireworks() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => createFirework(), i * 200);
+      }
+    }
+    
+    function createFirework() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffa726', '#66bb6a', '#ab47bc'];
+      const firework = document.createElement('div');
+      firework.className = 'firework';
+      firework.style.left = Math.random() * window.innerWidth + 'px';
+      firework.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(firework);
+      
+      for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'firework-particle';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.transform = `rotate(${i * 30}deg) translateX(${Math.random() * 100 + 50}px)`;
+        particle.style.animation = 'firework-explode 1s ease-out forwards';
+        firework.appendChild(particle);
+      }
+      
+      setTimeout(() => firework.remove(), 1000);
+    }
+    
+    // Add firework animation
+    const fireworkStyle = document.createElement('style');
+    fireworkStyle.textContent = `
+      @keyframes firework-explode {
+        0% { opacity: 1; transform: scale(0); }
+        50% { opacity: 1; }
+        100% { opacity: 0; transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(fireworkStyle);
+    
+    function startMatrixRain() {
+      const matrix = document.createElement('div');
+      matrix.className = 'matrix-rain';
+      matrix.id = 'matrix-container';
+      document.body.appendChild(matrix);
+      
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          if (document.getElementById('matrix-container')) {
+            createMatrixChar(chars);
+          }
+        }, i * 100);
+      }
+    }
+    
+    function createMatrixChar(chars) {
+      const char = document.createElement('div');
+      char.className = 'matrix-char';
+      char.textContent = chars[Math.floor(Math.random() * chars.length)];
+      char.style.left = Math.random() * window.innerWidth + 'px';
+      char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      
+      const matrix = document.getElementById('matrix-container');
+      if (matrix) {
+        matrix.appendChild(char);
+        setTimeout(() => char.remove(), 5000);
+      }
+    }
+    
+    function stopMatrixRain() {
+      const matrix = document.getElementById('matrix-container');
+      if (matrix) matrix.remove();
+    }
+    
+    function showEasterEggMessage() {
+      const messages = [
+        "🎉 Welcome to the Matrix! You found the secret!",
+        "🚀 Congratulations! You're now in hacker mode!",
+        "💻 The secret code has been activated!",
+        "🎮 Achievement Unlocked: Secret Explorer!"
+      ];
+      
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      
+      // Create floating message
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 10002;
+        animation: bounce-in 0.6s ease-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+      messageDiv.textContent = randomMessage;
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => messageDiv.remove(), 3000);
+    }
+    
+    function showNormalMessage() {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 10002;
+        animation: bounce-in 0.6s ease-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+      messageDiv.textContent = "✨ Back to normal mode! Thanks for exploring!";
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => messageDiv.remove(), 2000);
+    }
+
+    // 4. Konami Code Easter Egg (Up Up Down Down Left Right Left Right B A)
+    let konamiCode = [];
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+      'KeyB', 'KeyA'
+    ];
+    
+    document.addEventListener('keydown', (e) => {
+      konamiCode.push(e.code);
+      
+      if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+      }
+      
+      if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+        activateKonamiMode();
+        konamiCode = [];
+      }
+    });
+    
+    function activateKonamiMode() {
+      document.body.style.animation = 'rainbow-background 2s infinite';
+      triggerFireworks();
+      
+      setTimeout(() => {
+        document.body.style.animation = '';
+        showKonamiMessage();
+      }, 2000);
+    }
+    
+    function showKonamiMessage() {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #ff6b6b, #ffa726, #66bb6a, #42a5f5);
+        color: white;
+        padding: 30px 40px;
+        border-radius: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 10002;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      `;
+      messageDiv.innerHTML = "🎮🏆 KONAMI CODE ACTIVATED! 🏆🎮<br><small>You're a true gamer!</small>";
+      document.body.appendChild(messageDiv);
+      setTimeout(() => messageDiv.remove(), 4000);
+    }
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (particleSystem3D) {
+        particleSystem3D.destroy();
+      }
+    });
+  </script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+</body>
+</html>
