@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="qr-generator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-qrcode"></i> QR Code Generator</h1>
+            <p>Generate QR codes for text, URLs, and more</p>
+        </div>
+
+        <div class="generator-card">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="text-input">Enter text or URL:</label>
+                    <div class="input-wrapper">
+                        <textarea id="text-input" placeholder="Type your text, URL, or any content here..." rows="4"></textarea>
+                        <div class="input-info">
+                            <span id="char-count">0 characters</span>
+                            <span id="content-type">Text</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button type="button" class="preset-btn" data-preset="url">
+                        <i class="fas fa-link"></i>
+                        Website URL
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="email">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="phone">
+                        <i class="fas fa-phone"></i>
+                        Phone
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="wifi">
+                        <i class="fas fa-wifi"></i>
+                        WiFi
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="vcard">
+                        <i class="fas fa-address-card"></i>
+                        Contact
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="sms">
+                        <i class="fas fa-sms"></i>
+                        SMS
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="event">
+                        <i class="fas fa-calendar"></i>
+                        Event
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Location
+                    </button>
+                </div>
+
+                <div class="ai-suggestions" id="ai-suggestions" style="display: none;">
+                    <h4><i class="fas fa-magic"></i> AI Suggestions</h4>
+                    <div id="suggestions-list"></div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option-group">
+                        <label for="size-select">Size:</label>
+                        <select id="size-select">
+                            <option value="200">Small (200x200)</option>
+                            <option value="300" selected>Medium (300x300)</option>
+                            <option value="400">Large (400x400)</option>
+                            <option value="500">Extra Large (500x500)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="error-level">Error Correction:</label>
+                        <select id="error-level">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">High (25%)</option>
+                            <option value="H">Highest (30%)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="qr-style">QR Style:</label>
+                        <select id="qr-style">
+                            <option value="square">Square</option>
+                            <option value="rounded">Rounded</option>
+                            <option value="dots">Dots</option>
+                            <option value="gradient">Gradient</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="logo-upload">Logo (Center):</label>
+                        <div class="logo-upload">
+                            <input type="file" id="logo-upload" accept="image/*" style="display: none;">
+                            <button type="button" id="logo-btn" class="upload-btn">
+                                <i class="fas fa-image"></i>
+                                Add Logo
+                            </button>
+                            <div id="logo-preview" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="color-input">Foreground:</label>
+                        <div class="color-picker">
+                            <input type="color" id="color-input" value="#000000">
+                            <div class="color-presets">
+                                <div class="color-preset" data-color="#000000" style="background: #000000"></div>
+                                <div class="color-preset" data-color="#1e3a8a" style="background: #1e3a8a"></div>
+                                <div class="color-preset" data-color="#dc2626" style="background: #dc2626"></div>
+                                <div class="color-preset" data-color="#16a34a" style="background: #16a34a"></div>
+                                <div class="color-preset" data-color="#7c3aed" style="background: #7c3aed"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="bg-color-input">Background:</label>
+                        <div class="color-picker">
+                            <input type="color" id="bg-color-input" value="#ffffff">
+                            <div class="color-presets">
+                                <div class="color-preset" data-color="#ffffff" style="background: #ffffff; border: 1px solid #ddd"></div>
+                                <div class="color-preset" data-color="#f3f4f6" style="background: #f3f4f6"></div>
+                                <div class="color-preset" data-color="#fef3c7" style="background: #fef3c7"></div>
+                                <div class="color-preset" data-color="#dbeafe" style="background: #dbeafe"></div>
+                                <div class="color-preset" data-color="#000000" style="background: #000000"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="batch-section">
+                    <h4><i class="fas fa-layer-group"></i> Batch Generation</h4>
+                    <div class="batch-controls">
+                        <textarea id="batch-input" placeholder="Enter multiple texts, one per line..."></textarea>
+                        <button id="batch-generate" class="batch-btn">
+                            <i class="fas fa-magic"></i>
+                            Generate Batch
+                        </button>
+                    </div>
+                    <div id="batch-results" class="batch-results"></div>
+                </div>
+
+                <div class="generate-section">
+                    <button id="generate-btn" class="generate-btn">
+                        <i class="fas fa-magic"></i>
+                        Generate QR Code
+                    </button>
+                    <button id="clear-btn" class="clear-btn">
+                        <i class="fas fa-eraser"></i>
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="qr-canvas-container">
+                    <div id="qr-container" class="qr-container">
+                        <div class="placeholder">
+                            <i class="fas fa-qrcode"></i>
+                            <p>Your QR code will appear here</p>
+                        </div>
+                    </div>
+                    
+                    <div class="qr-scanner" id="qr-scanner" style="display: none;">
+                        <video id="scanner-video" autoplay playsinline></video>
+                        <div class="scanner-overlay">
+                            <div class="scanner-frame"></div>
+                            <p>Position QR code within the frame</p>
+                        </div>
+                        <button id="stop-scanner" class="stop-btn">
+                            <i class="fas fa-stop"></i>
+                            Stop Scanner
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scanner-controls">
+                    <button id="scan-qr" class="scan-btn">
+                        <i class="fas fa-camera"></i>
+                        Scan QR Code
+                    </button>
+                    <button id="voice-input" class="voice-btn">
+                        <i class="fas fa-microphone"></i>
+                        Voice Input
+                    </button>
+                    <div class="voice-status" id="voice-status" style="display: none;">
+                        <i class="fas fa-microphone"></i>
+                        <span>Listening...</span>
+                    </div>
+                </div>
+
+                <!-- Portfolio QR Code Section -->
+                <div class="portfolio-qr-section" style="margin-top: 20px; text-align: center; padding: 20px; background: #f8f9fa; border-radius: 12px; border: 2px dashed #dee2e6;">
+                    <h4 style="margin-bottom: 15px; color: #495057; font-size: 1.1rem;">
+                        <i class="fas fa-user-circle" style="margin-right: 8px; color: #667eea;"></i>
+                        Scan for Portfolio
+                    </h4>
+                    <div class="qr-code-container" style="display: inline-block; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <img src="qr-code.png" alt="Portfolio QR Code" style="width: 150px; height: 150px; display: block;">
+                    </div>
+                    <p style="margin-top: 12px; color: #6c757d; font-size: 0.9rem; margin-bottom: 0;">
+                        Scan this QR code to view my portfolio
+                    </p>
+                </div>
+
+                <div id="qr-info" class="qr-info" style="display: none;">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <span>Size: <span id="qr-size-info">300x300</span></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Error Level: <span id="qr-error-info">Medium</span></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-font"></i>
+                            <span>Content: <span id="qr-content-info">Text</span></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Generated: <span id="qr-timestamp"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="download-section" class="download-section" style="display: none;">
+                    <div class="download-options">
+                        <button id="download-png" class="download-btn primary">
+                            <i class="fas fa-download"></i>
+                            Download PNG
+                        </button>
+                        <button id="download-svg" class="download-btn secondary">
+                            <i class="fas fa-vector-square"></i>
+                            Download SVG
+                        </button>
+                        <button id="download-pdf" class="download-btn secondary">
+                            <i class="fas fa-file-pdf"></i>
+                            Download PDF
+                        </button>
+                        <button id="copy-link" class="download-btn secondary">
+                            <i class="fas fa-link"></i>
+                            Copy Link
+                        </button>
+                        <button id="share-qr" class="download-btn secondary">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Advanced Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Real-time Generation</h3>
+                    <p>Generate QR codes instantly with live preview as you type</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-palette"></i>
+                    <h3>Full Customization</h3>
+                    <p>Choose colors, sizes, error correction levels, and formats</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-download"></i>
+                    <h3>Multiple Formats</h3>
+                    <p>Download as PNG, SVG, or copy as shareable link</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Optimized</h3>
+                    <p>Perfect experience on all devices with touch support</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Error Correction</h3>
+                    <p>Choose from 4 error correction levels for reliability</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-wifi"></i>
+                    <h3>Smart Templates</h3>
+                    <p>Quick presets for URLs, emails, phone numbers, and WiFi</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WiFi Modal -->
+        <div id="wifi-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-wifi"></i> WiFi QR Code</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="wifi-ssid">Network Name (SSID):</label>
+                        <input type="text" id="wifi-ssid" placeholder="Enter WiFi network name">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifi-password">Password:</label>
+                        <input type="password" id="wifi-password" placeholder="Enter WiFi password">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifi-security">Security Type:</label>
+                        <select id="wifi-security">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">No Password</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="wifi-hidden">
+                            Hidden Network
+                        </label>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="wifi-generate" class="generate-btn">Generate WiFi QR</button>
+                        <button id="wifi-cancel" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp Modal -->
+        <div id="whatsapp-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fab fa-whatsapp"></i> WhatsApp QR Code</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="whatsapp-phone">Phone Number:</label>
+                        <input type="tel" id="whatsapp-phone" placeholder="+1234567890 (with country code)">
+                        <small>Include country code (e.g., +1 for US, +44 for UK)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp-message">Pre-filled Message (Optional):</label>
+                        <textarea id="whatsapp-message" placeholder="Hello! I got your contact from..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="whatsapp-type" value="chat" checked>
+                            Direct Chat
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="whatsapp-type" value="business">
+                            WhatsApp Business
+                        </label>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="whatsapp-generate" class="generate-btn">Generate WhatsApp QR</button>
+                        <button id="whatsapp-cancel" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Modal -->
+        <div id="vcard-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-address-card"></i> Contact QR Code</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vcard-firstname">First Name:</label>
+                            <input type="text" id="vcard-firstname" placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label for="vcard-lastname">Last Name:</label>
+                            <input type="text" id="vcard-lastname" placeholder="Doe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vcard-phone">Phone:</label>
+                        <input type="tel" id="vcard-phone" placeholder="+1234567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="vcard-email">Email:</label>
+                        <input type="email" id="vcard-email" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="vcard-company">Company:</label>
+                        <input type="text" id="vcard-company" placeholder="Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="vcard-title">Job Title:</label>
+                        <input type="text" id="vcard-title" placeholder="Software Developer">
+                    </div>
+                    <div class="form-group">
+                        <label for="vcard-website">Website:</label>
+                        <input type="url" id="vcard-website" placeholder="https://example.com">
+                    </div>
+                    <div class="modal-actions">
+                        <button id="vcard-generate" class="generate-btn">Generate Contact QR</button>
+                        <button id="vcard-cancel" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Modal -->
+        <div id="event-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-calendar"></i> Event QR Code</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="event-title">Event Title:</label>
+                        <input type="text" id="event-title" placeholder="Meeting Title">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-start">Start Date:</label>
+                            <input type="datetime-local" id="event-start">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-end">End Date:</label>
+                            <input type="datetime-local" id="event-end">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Location:</label>
+                        <input type="text" id="event-location" placeholder="Conference Room A">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Description:</label>
+                        <textarea id="event-description" placeholder="Event description..."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="event-generate" class="generate-btn">Generate Event QR</button>
+                        <button id="event-cancel" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Modal -->
+        <div id="history-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-history"></i> QR Code History</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="history-search">
+                        <input type="text" id="history-search" placeholder="Search history...">
+                        <button id="clear-history" class="clear-btn">Clear All</button>
+                    </div>
+                    <div id="history-list" class="history-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Analytics Modal -->
+        <div id="analytics-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-chart-bar"></i> QR Code Analytics</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h4>Total Generated</h4>
+                            <span id="total-generated">0</span>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Most Used Type</h4>
+                            <span id="most-used-type">Text</span>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Average Size</h4>
+                            <span id="average-size">300px</span>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Downloads</h4>
+                            <span id="total-downloads">0</span>
+                        </div>
+                    </div>
+                    <canvas id="analytics-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <div class="fab-container">
+            <button id="main-fab" class="fab main-fab">
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="fab-menu">
+                <button id="history-fab" class="fab" title="History">
+                    <i class="fas fa-history"></i>
+                </button>
+                <button id="analytics-fab" class="fab" title="Analytics">
+                    <i class="fas fa-chart-bar"></i>
+                </button>
+                <button id="templates-fab" class="fab" title="Templates">
+                    <i class="fas fa-templates"></i>
+                </button>
+                <button id="settings-fab" class="fab" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Notification Container -->
+        <div id="notification-container" class="notification-container"></div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+        </div>
+
+        <!-- Developer Credits -->
+        <div class="developer-credits" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h3 style="margin-bottom: 15px; font-size: 1.8rem; font-weight: 600;">
+                    <i class="fas fa-heart" style="color: #ff6b6b; margin-right: 10px; animation: pulse 2s infinite;"></i>
+                    Developed with Love
+                </h3>
+                <p style="font-size: 1.2rem; margin-bottom: 20px; opacity: 0.95;">
+                    by <strong>Titus T. Bangura</strong>
+                </p>
+                
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 25px; margin: 20px 0;">
+                    <p style="margin-bottom: 15px; font-size: 1.1rem;">
+                        <i class="fas fa-gift" style="margin-right: 8px; color: #ffd93d;"></i>
+                        <strong>Free QR Generator Tool</strong>
+                    </p>
+                    <p style="margin-bottom: 0; opacity: 0.9; line-height: 1.6;">
+                        This tool is completely free to use! Generate unlimited QR codes with advanced features including batch processing, custom styling, and multiple download formats.
+                    </p>
+                </div>
+
+                <div class="contact-info-container" style="display: flex; justify-content: center; gap: 30px; margin-top: 25px; flex-wrap: wrap;">
+                    <div class="contact-item-mobile" style="display: flex; align-items: center; gap: 8px; margin: 5px 0;">
+                        <i class="fas fa-envelope" style="color: #ffd93d; min-width: 16px;"></i>
+                        <a href="mailto:tbanguratitus@gmail.com" style="color: white; text-decoration: none; font-weight: 500; word-break: break-word;">
+                            tbanguratitus@gmail.com
+                        </a>
+                    </div>
+                    <div class="contact-item-mobile" style="display: flex; align-items: center; gap: 8px; margin: 5px 0;">
+                        <i class="fas fa-map-marker-alt" style="color: #ffd93d; min-width: 16px;"></i>
+                        <span style="font-weight: 500;">Freetown, Sierra Leone</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">
+                        <i class="fas fa-code" style="margin-right: 5px;"></i>
+                        Built with modern web technologies • Open source friendly
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsqr/1.4.0/jsQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
+    
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .developer-credits a:hover {
+            text-decoration: underline !important;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .developer-credits i {
+            transition: transform 0.3s ease;
+        }
+        
+        .developer-credits:hover i.fa-heart {
+            transform: scale(1.2);
+        }
+
+        /* Mobile Responsive Styles for Developer Credits */
+        @media (max-width: 768px) {
+            .developer-credits {
+                margin: 30px 10px !important;
+                padding: 25px 15px !important;
+                border-radius: 12px !important;
+            }
+            
+            .developer-credits h3 {
+                font-size: 1.4rem !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .developer-credits p {
+                font-size: 1rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .developer-credits > div > div {
+                padding: 20px 15px !important;
+                margin: 15px 0 !important;
+            }
+            
+            .developer-credits > div > div p:first-child {
+                font-size: 1rem !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .developer-credits > div > div p:last-child {
+                font-size: 0.9rem !important;
+                line-height: 1.5 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .developer-credits {
+                margin: 20px 5px !important;
+                padding: 20px 10px !important;
+            }
+            
+            .developer-credits h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .developer-credits p {
+                font-size: 0.95rem !important;
+            }
+            
+            .developer-credits > div > div {
+                padding: 15px 10px !important;
+                margin: 12px 0 !important;
+            }
+            
+            .developer-credits > div > div p:first-child {
+                font-size: 0.95rem !important;
+            }
+            
+            .developer-credits > div > div p:last-child {
+                font-size: 0.85rem !important;
+            }
+            
+            /* Stack contact info vertically on very small screens */
+            .contact-info-container {
+                flex-direction: column !important;
+                gap: 10px !important;
+                margin-top: 20px !important;
+            }
+            
+            .contact-item-mobile {
+                justify-content: center !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .contact-item-mobile a {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Make email break properly on very small screens */
+            .contact-item-mobile a {
+                overflow-wrap: break-word !important;
+                word-wrap: break-word !important;
+                max-width: 100% !important;
+            }
+        }
+
+        /* Mobile Responsive Styles for QR Generator */
+        @media (max-width: 768px) {
+            .generator-card {
+                margin: 10px !important;
+                padding: 15px !important;
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            .input-section, .output-section {
+                padding: 15px !important;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+                gap: 8px !important;
+            }
+            
+            .preset-btn {
+                padding: 8px 4px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .qr-container {
+                min-height: 200px !important;
+            }
+            
+            .portfolio-qr-section {
+                padding: 15px !important;
+                margin-top: 15px !important;
+            }
+            
+            .portfolio-qr-section img {
+                width: 120px !important;
+                height: 120px !important;
+            }
+        }
+
+        /* Extra Mobile Responsive for very small screens */
+        @media (max-width: 600px) {
+            .generator-card {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .header h1 {
+                font-size: 2rem !important;
+            }
+            
+            .header p {
+                font-size: 1rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px !important;
+            }
+            
+            body {
+                padding: 10px !important;
+            }
+            
+            .generator-card {
+                margin: 5px !important;
+                padding: 10px !important;
+                flex-direction: column !important;
+            }
+            
+            .input-section {
+                width: 100% !important;
+                margin-bottom: 20px !important;
+                padding: 10px !important;
+            }
+            
+            .output-section {
+                width: 100% !important;
+                padding: 10px !important;
+            }
+            
+            /* Stack options vertically on very small screens */
+            .options-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+            
+            .option-group {
+                margin-bottom: 15px !important;
+            }
+            
+            .option-group label {
+                font-size: 0.9rem !important;
+                margin-bottom: 5px !important;
+            }
+            
+            .option-group select,
+            .option-group input {
+                font-size: 0.9rem !important;
+                padding: 8px !important;
+            }
+            
+            /* Quick actions responsive */
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important;
+                padding: 15px !important;
+                margin: 15px 0 !important;
+            }
+            
+            .preset-btn {
+                padding: 10px 6px !important;
+                font-size: 0.75rem !important;
+                text-align: center !important;
+            }
+            
+            .preset-btn i {
+                display: block !important;
+                margin-bottom: 4px !important;
+                font-size: 1rem !important;
+            }
+            
+            /* QR Container responsive */
+            .qr-canvas-container {
+                margin-bottom: 15px !important;
+            }
+            
+            .qr-container {
+                min-height: 180px !important;
+                padding: 10px !important;
+            }
+            
+            .qr-container canvas,
+            .qr-container img {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Scanner controls responsive */
+            .scanner-controls {
+                flex-direction: column !important;
+                gap: 10px !important;
+                margin-top: 15px !important;
+            }
+            
+            .scan-btn, .voice-btn {
+                width: 100% !important;
+                padding: 15px !important;
+                font-size: 0.95rem !important;
+                border-radius: 10px !important;
+            }
+            
+            /* Modal responsive */
+            .modal-content {
+                margin: 20px !important;
+                width: calc(100% - 40px) !important;
+                max-width: none !important;
+            }
+            
+            .modal-body {
+                padding: 15px !important;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+                padding: 12px !important;
+            }
+            
+            /* Portfolio QR section responsive */
+            .portfolio-qr-section {
+                padding: 12px !important;
+                margin-top: 12px !important;
+            }
+            
+            .portfolio-qr-section h4 {
+                font-size: 1rem !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .portfolio-qr-section img {
+                width: 100px !important;
+                height: 100px !important;
+            }
+            
+            .portfolio-qr-section p {
+                font-size: 0.8rem !important;
+                margin-top: 8px !important;
+            }
+            
+            /* Download section responsive */
+            .download-section {
+                margin-top: 15px !important;
+            }
+            
+            .download-options {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            
+            .download-btn {
+                width: 100% !important;
+                padding: 12px !important;
+                font-size: 0.9rem !important;
+                justify-content: center !important;
+            }
+            
+            /* QR Info responsive */
+            .qr-info .info-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+            
+            .info-item {
+                padding: 8px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            /* Batch section responsive */
+            .batch-section {
+                margin-top: 20px !important;
+            }
+            
+            .batch-controls textarea {
+                min-height: 80px !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .batch-btn {
+                width: 100% !important;
+                padding: 12px !important;
+                font-size: 0.9rem !important;
+                margin-top: 10px !important;
+            }
+            
+            /* Generate section responsive */
+            .generate-section {
+                flex-direction: column !important;
+                gap: 10px !important;
+                margin-top: 20px !important;
+            }
+            
+            .generate-btn, .clear-btn {
+                width: 100% !important;
+                padding: 15px !important;
+                font-size: 1rem !important;
+            }
+            
+            /* Text input responsive */
+            textarea#text-input {
+                font-size: 0.9rem !important;
+                padding: 10px !important;
+                min-height: 80px !important;
+            }
+            
+            .input-info {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 5px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            /* Color picker responsive */
+            .color-picker {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            
+            .color-presets {
+                justify-content: center !important;
+                gap: 8px !important;
+            }
+            
+            .color-preset {
+                width: 25px !important;
+                height: 25px !important;
+            }
+            
+            /* Features section responsive */
+            .features {
+                margin: 30px 10px !important;
+                padding: 20px 10px !important;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .feature-item {
+                padding: 15px !important;
+                text-align: center !important;
+            }
+            
+            .feature-item h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            .feature-item p {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Upload button responsive */
+            .upload-btn {
+                width: 100% !important;
+                padding: 12px !important;
+                font-size: 0.9rem !important;
+            }
+            
+            /* FAB responsive */
+            .fab-container {
+                bottom: 20px !important;
+                right: 20px !important;
+            }
+            
+            .fab {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            
+            .main-fab {
+                width: 56px !important;
+                height: 56px !important;
+            }
+            
+            /* Ensure all text is readable */
+            * {
+                -webkit-text-size-adjust: 100% !important;
+                text-size-adjust: 100% !important;
+            }
+        }
+    </style>
+    <script>
+        // Wait for all scripts to load before initializing
+        window.addEventListener('load', function() {
+            // Small delay to ensure all scripts are fully loaded
+            setTimeout(function() {
+                if (typeof QRious === 'undefined') {
+                    console.error('QRious library failed to load');
+                    alert('Error: QR Code library failed to load. Please refresh the page.');
+                }
+            }, 100);
+        });
+    </script>
+    <script src="qr_generator.js"></script>
+</body>
+</html>
