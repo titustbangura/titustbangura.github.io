@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -210,17 +211,18 @@
       <!-- Project Card 2 -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web">
         <div class="card project-card h-100 shadow">
-          <img src="https://via.placeholder.com/400x200?text=Portfolio+Website" class="card-img-top" alt="Portfolio Website">
+          <img src="QR-IMAGE.jpeg" class="card-img-top" alt="QR Code Generator">
           <div class="card-body">
             <div class="project-tech mb-2">
               <span class="tech-tag">HTML5</span>
               <span class="tech-tag">CSS3</span>
               <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">QRious</span>
             </div>
-            <h5 class="card-title">Personal Portfolio</h5>
-            <p class="card-text">A modern, animated portfolio website to showcase my skills and projects. Built with HTML, CSS, JS, and Bootstrap.</p>
+            <h5 class="card-title">QR Code Generator</h5>
+            <p class="card-text">Advanced QR code generator with scanning capabilities, analytics dashboard, and multiple export formats. Features mobile-responsive design.</p>
             <div class="project-links">
-              <a href="#" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+              <a href="qr-generator.html" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
               <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
             </div>
           </div>
@@ -1825,3 +1827,121 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
+        "🎉 Welcome to the Matrix! You found the secret!",
+        "🚀 Congratulations! You're now in hacker mode!",
+        "💻 The secret code has been activated!",
+        "🎮 Achievement Unlocked: Secret Explorer!"
+      ];
+      
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      
+      // Create floating message
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 10002;
+        animation: bounce-in 0.6s ease-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+      messageDiv.textContent = randomMessage;
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => messageDiv.remove(), 3000);
+    }
+    
+    function showNormalMessage() {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 10002;
+        animation: bounce-in 0.6s ease-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      `;
+      messageDiv.textContent = "✨ Back to normal mode! Thanks for exploring!";
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => messageDiv.remove(), 2000);
+    }
+
+    // 4. Konami Code Easter Egg (Up Up Down Down Left Right Left Right B A)
+    let konamiCode = [];
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+      'KeyB', 'KeyA'
+    ];
+    
+    document.addEventListener('keydown', (e) => {
+      konamiCode.push(e.code);
+      
+      if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+      }
+      
+      if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+        activateKonamiMode();
+        konamiCode = [];
+      }
+    });
+    
+    function activateKonamiMode() {
+      document.body.style.animation = 'rainbow-background 2s infinite';
+      triggerFireworks();
+      
+      setTimeout(() => {
+        document.body.style.animation = '';
+        showKonamiMessage();
+      }, 2000);
+    }
+    
+    function showKonamiMessage() {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #ff6b6b, #ffa726, #66bb6a, #42a5f5);
+        color: white;
+        padding: 30px 40px;
+        border-radius: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 10002;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      `;
+      messageDiv.innerHTML = "🎮🏆 KONAMI CODE ACTIVATED! 🏆🎮<br><small>You're a true gamer!</small>";
+      document.body.appendChild(messageDiv);
+      setTimeout(() => messageDiv.remove(), 4000);
+    }
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (particleSystem3D) {
+        particleSystem3D.destroy();
+      }
+    });
+  </script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+</body>
+</html>
+
