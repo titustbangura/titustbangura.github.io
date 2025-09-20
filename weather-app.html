@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Real-time Weather Data</title>
+    <link rel="stylesheet" href="weather-app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1><i class="fas fa-cloud-sun"></i> Weather App</h1>
+            <p>Get real-time weather information for any city</p>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Enter city name..." aria-label="City name">
+                <button id="searchBtn" aria-label="Search weather"><i class="fas fa-search"></i></button>
+            </div>
+            <button id="locationBtn" class="location-btn" aria-label="Use current location">
+                <i class="fas fa-map-marker-alt"></i> Use My Location
+            </button>
+        </div>
+
+        <div id="loadingSpinner" class="loading" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Getting weather data...</p>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p id="errorText">City not found. Please try again.</p>
+        </div>
+
+        <div id="welcomeMessage" class="welcome-message">
+            <div class="welcome-content">
+                <i class="fas fa-cloud-sun weather-icon-large"></i>
+                <h2>Welcome to Weather App</h2>
+                <p>Search for any city worldwide to get real-time weather information and 5-day forecast</p>
+                <div class="welcome-features">
+                    <div class="feature">
+                        <i class="fas fa-search"></i>
+                        <span>Search any city</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Use your location</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-calendar-week"></i>
+                        <span>5-day forecast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="weatherCard" class="weather-card" style="display: none;">
+            <div class="weather-header">
+                <div class="location-info">
+                    <h2 id="cityName">New York</h2>
+                    <p id="countryName">United States</p>
+                    <p id="currentTime"></p>
+                </div>
+                <div class="weather-icon">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                </div>
+            </div>
+
+            <div class="main-weather">
+                <div class="temperature">
+                    <span id="currentTemp">22</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+                <div class="weather-description">
+                    <p id="weatherDesc">Partly Cloudy</p>
+                    <p id="feelsLike">Feels like 25°C</p>
+                </div>
+            </div>
+
+            <div class="weather-details">
+                <div class="detail-item">
+                    <i class="fas fa-eye"></i>
+                    <span>Visibility</span>
+                    <span id="visibility">10 km</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-tint"></i>
+                    <span>Humidity</span>
+                    <span id="humidity">65%</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-wind"></i>
+                    <span>Wind Speed</span>
+                    <span id="windSpeed">15 km/h</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span>Pressure</span>
+                    <span id="pressure">1013 hPa</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-sun"></i>
+                    <span>UV Index</span>
+                    <span id="uvIndex">3</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-cloud"></i>
+                    <span>Cloud Cover</span>
+                    <span id="cloudCover">40%</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="forecastCard" class="forecast-card" style="display: none;">
+            <h3><i class="fas fa-calendar-week"></i> 5-Day Forecast</h3>
+            <div id="forecastContainer" class="forecast-container">
+                <!-- Forecast items will be added here dynamically -->
+            </div>
+        </div>
+
+        <div class="recent-searches" id="recentSearches" style="display: none;">
+            <h3><i class="fas fa-history"></i> Recent Searches</h3>
+            <div id="recentList" class="recent-list">
+                <!-- Recent searches will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 Weather App by Titus T. Bangura | Built with HTML, CSS & JavaScript</p>
+    </footer>
+
+    <script src="weather-app.js"></script>
+</body>
+</html>
