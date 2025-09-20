@@ -1526,8 +1526,12 @@
     
     window.addEventListener('load', () => {
       setTimeout(() => {
-        if (document.getElementById('particles-canvas')) {
-          particleSystem3D = new ParticleSystem3D();
+        try {
+          if (document.getElementById('particles-canvas')) {
+            particleSystem3D = new ParticleSystem3D();
+          }
+        } catch (error) {
+          console.log('Particles system initialization failed:', error);
         }
       }, 1100); // Start after loader finishes
     });
@@ -1621,19 +1625,21 @@
     const secretButton = document.getElementById('secretButton');
     let matrixActive = false;
     
-    secretButton.addEventListener('click', () => {
-      if (!matrixActive) {
-        triggerFireworks();
-        setTimeout(() => {
-          startMatrixRain();
-          showEasterEggMessage();
-        }, 1000);
-      } else {
-        stopMatrixRain();
-        showNormalMessage();
-      }
-      matrixActive = !matrixActive;
-    });
+    if (secretButton) {
+      secretButton.addEventListener('click', () => {
+        if (!matrixActive) {
+          triggerFireworks();
+          setTimeout(() => {
+            startMatrixRain();
+            showEasterEggMessage();
+          }, 1000);
+        } else {
+          stopMatrixRain();
+          showNormalMessage();
+        }
+        matrixActive = !matrixActive;
+      });
+    }
     
     function triggerFireworks() {
       for (let i = 0; i < 15; i++) {
@@ -1819,129 +1825,15 @@
 
     // Clean up on page unload
     window.addEventListener('beforeunload', () => {
-      if (particleSystem3D) {
-        particleSystem3D.destroy();
+      try {
+        if (particleSystem3D && typeof particleSystem3D.destroy === 'function') {
+          particleSystem3D.destroy();
+        }
+      } catch (error) {
+        console.log('Cleanup error:', error);
       }
     });
   </script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
-        "🎉 Welcome to the Matrix! You found the secret!",
-        "🚀 Congratulations! You're now in hacker mode!",
-        "💻 The secret code has been activated!",
-        "🎮 Achievement Unlocked: Secret Explorer!"
-      ];
-      
-      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      
-      // Create floating message
-      const messageDiv = document.createElement('div');
-      messageDiv.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        color: white;
-        padding: 20px 30px;
-        border-radius: 15px;
-        font-size: 18px;
-        font-weight: bold;
-        z-index: 10002;
-        animation: bounce-in 0.6s ease-out;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      `;
-      messageDiv.textContent = randomMessage;
-      document.body.appendChild(messageDiv);
-      
-      setTimeout(() => messageDiv.remove(), 3000);
-    }
-    
-    function showNormalMessage() {
-      const messageDiv = document.createElement('div');
-      messageDiv.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
-        padding: 20px 30px;
-        border-radius: 15px;
-        font-size: 18px;
-        font-weight: bold;
-        z-index: 10002;
-        animation: bounce-in 0.6s ease-out;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      `;
-      messageDiv.textContent = "✨ Back to normal mode! Thanks for exploring!";
-      document.body.appendChild(messageDiv);
-      
-      setTimeout(() => messageDiv.remove(), 2000);
-    }
-
-    // 4. Konami Code Easter Egg (Up Up Down Down Left Right Left Right B A)
-    let konamiCode = [];
-    const konamiSequence = [
-      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-      'KeyB', 'KeyA'
-    ];
-    
-    document.addEventListener('keydown', (e) => {
-      konamiCode.push(e.code);
-      
-      if (konamiCode.length > konamiSequence.length) {
-        konamiCode.shift();
-      }
-      
-      if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
-        activateKonamiMode();
-        konamiCode = [];
-      }
-    });
-    
-    function activateKonamiMode() {
-      document.body.style.animation = 'rainbow-background 2s infinite';
-      triggerFireworks();
-      
-      setTimeout(() => {
-        document.body.style.animation = '';
-        showKonamiMessage();
-      }, 2000);
-    }
-    
-    function showKonamiMessage() {
-      const messageDiv = document.createElement('div');
-      messageDiv.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(45deg, #ff6b6b, #ffa726, #66bb6a, #42a5f5);
-        color: white;
-        padding: 30px 40px;
-        border-radius: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        z-index: 10002;
-        text-align: center;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      `;
-      messageDiv.innerHTML = "🎮🏆 KONAMI CODE ACTIVATED! 🏆🎮<br><small>You're a true gamer!</small>";
-      document.body.appendChild(messageDiv);
-      setTimeout(() => messageDiv.remove(), 4000);
-    }
-
-    // Clean up on page unload
-    window.addEventListener('beforeunload', () => {
-      if (particleSystem3D) {
-        particleSystem3D.destroy();
-      }
-    });
-  </script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
-</body>
-</html>
-
