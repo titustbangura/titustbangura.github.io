@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern CSS Techniques for Better Layouts | CSS Grid, Flexbox & Advanced Layouts</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Master modern CSS techniques including CSS Grid, Flexbox, custom properties, and container queries. Learn responsive layouts with practical examples and code snippets.">
+    <meta name="keywords" content="CSS Grid, Flexbox, responsive design, CSS custom properties, container queries, web development, modern CSS, layout techniques">
+    <meta name="author" content="Titus T. Bangura">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://yourwebsite.com/css-techniques">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourwebsite.com/css-techniques">
+    <meta property="og:title" content="Modern CSS Techniques for Better Layouts | CSS Grid, Flexbox & Advanced Layouts">
+    <meta property="og:description" content="Master modern CSS techniques including CSS Grid, Flexbox, custom properties, and container queries. Learn responsive layouts with practical examples.">
+    <meta property="og:image" content="https://yourwebsite.com/images/css-techniques-og.jpg">
+    <meta property="og:site_name" content="Your Website Name">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/css-techniques">
+    <meta property="twitter:title" content="Modern CSS Techniques for Better Layouts | CSS Grid, Flexbox & Advanced Layouts">
+    <meta property="twitter:description" content="Master modern CSS techniques including CSS Grid, Flexbox, custom properties, and container queries. Learn responsive layouts with practical examples.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/css-techniques-twitter.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Modern CSS Techniques for Better Layouts",
+        "description": "Master modern CSS techniques including CSS Grid, Flexbox, custom properties, and container queries. Learn responsive layouts with practical examples and code snippets.",
+        "image": "https://yourwebsite.com/images/css-techniques-og.jpg",
+        "author": {
+            "@type": "Person",
+            "name": "Titus T. Bangura",
+            "jobTitle": "Diploma Software Engineer",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Freetown",
+                "addressCountry": "Sierra Leone"
+            }
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Your Website Name",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://yourwebsite.com/logo.png"
+            }
+        },
+        "datePublished": "2024-11-28",
+        "dateModified": "2024-11-28",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://yourwebsite.com/css-techniques"
+        },
+        "keywords": ["CSS Grid", "Flexbox", "responsive design", "CSS custom properties", "container queries", "web development"]
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-color: #2d3748;
+            --bg-color: white;
+            --code-bg: #1e1e1e;
+            --border-color: #e2e8f0;
+        }
+
+        [data-theme="dark"] {
+            --text-color: #e2e8f0;
+            --bg-color: #1a202c;
+            --code-bg: #0d1117;
+            --border-color: #2d3748;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Table of Contents */
+        .toc {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 200px;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .toc {
+            background: rgba(26, 32, 44, 0.95);
+        }
+
+        .toc.hidden {
+            transform: translateY(-50%) translateX(-250px);
+            opacity: 0;
+        }
+
+        .toc h4 {
+            color: var(--bg-gradient-start);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 10px 0;
+        }
+
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .toc a:hover, .toc a.active {
+            background: var(--bg-gradient-start);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .toc-toggle {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            background: var(--bg-gradient-start);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 101;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .toc-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .date {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--bg-gradient-start);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            scroll-margin-top: 20px;
+        }
+
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            border-radius: 3px;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #4a5568;
+            margin: 30px 0 15px 0;
+        }
+
+        [data-theme="dark"] h3 {
+            color: #cbd5e0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .code-lang {
+            color: #61dafb;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn.copied {
+            background: #27c93f;
+            border-color: #27c93f;
+        }
+
+        code {
+            color: #e6e6e6;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            display: block;
+            white-space: pre;
+            counter-reset: line;
+        }
+
+        .code-with-lines code {
+            padding-left: 50px;
+        }
+
+        .code-with-lines code .line {
+            display: block;
+            position: relative;
+        }
+
+        .code-with-lines code .line::before {
+            content: counter(line);
+            counter-increment: line;
+            position: absolute;
+            left: -40px;
+            width: 30px;
+            text-align: right;
+            color: #6a9955;
+            opacity: 0.5;
+            user-select: none;
+        }
+
+        .keyword { color: #c586c0; }
+        .property { color: #9cdcfe; }
+        .value { color: #ce9178; }
+        .selector { color: #d7ba7d; }
+        .comment { color: #6a9955; font-style: italic; }
+
+        /* Interactive Playground */
+        .playground {
+            background: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .playground-label {
+            background: var(--bg-gradient-start);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .playground-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border-color);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--bg-gradient-start);
+            cursor: pointer;
+        }
+
+        .control-group select {
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .control-value {
+            font-size: 12px;
+            color: var(--bg-gradient-start);
+            font-weight: 700;
+        }
+
+        .playground-preview {
+            min-height: 300px;
+            background: #f7fafc;
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        [data-theme="dark"] .playground-preview {
+            background: #0d1117;
+        }
+
+        .playground-item {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .demo-box {
+            background: #f7fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        [data-theme="dark"] .demo-box {
+            background: #0d1117;
+        }
+
+        .demo-label {
+            background: var(--bg-gradient-start);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .flex-demo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .flex-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .flex-item:hover {
+            transform: scale(1.05);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-left: 5px solid #e17055;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .tip-box strong {
+            color: #d63031;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Social Share */
+        .social-share {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .social-share h3 {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .twitter { background: #1DA1F2; }
+        .linkedin { background: #0077B5; }
+        .facebook { background: #4267B2; }
+
+        .author-box {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--bg-gradient-start);
+            flex-shrink: 0;
+        }
+
+        .author-info h3 {
+            color: white;
+            margin: 0 0 5px 0;
+        }
+
+        .author-info p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        /* Pricing Table */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pricing-card {
+            background: var(--bg-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .pricing-header {
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-header.basic {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .pricing-header.pro {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .pricing-header.enterprise {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .pricing-header h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .price {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .currency {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        .amount {
+            font-size: 4em;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .period {
+            font-size: 1em;
+            align-self: flex-end;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .pricing-body {
+            padding: 30px;
+        }
+
+        .features {
+            list-style: none;
+            margin: 0 0 30px 0;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1em;
+            color: var(--text-color);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .basic-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .pro-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .enterprise-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .theme-toggle, .toc, .toc-toggle, .progress-bar, .social-share {
+                display: none;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .code-block {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .toc {
+                display: none;
+            }
+            .toc.hidden {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 30px 25px;
+            }
+
+            .author-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            code {
+                font-size: 12px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .amount {
+                font-size: 3em;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 16px;
+            }
+
+            .playground-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <span id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+    </button>
+
+    <!-- Table of Contents -->
+    <nav class="toc" id="toc">
+        <h4>📚 Contents</h4>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#grid">CSS Grid</a></li>
+            <li><a href="#flexbox">Flexbox</a></li>
+            <li><a href="#combining">Combining Both</a></li>
+            <li><a href="#modern">Modern Features</a></li>
+            <li><a href="#pricing">Pricing Example</a></li>
+        </ul>
+    </nav>
+    <button class="toc-toggle" id="tocToggle">📚 Menu</button>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="meta">
+                    <span class="date">📅 November 28, 2024</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">Web Development</span>
+                </div>
+                <h1>Modern CSS Techniques for Better Layouts</h1>
+                <p class="subtitle">Discover CSS Grid, Flexbox, and other modern techniques to create stunning and responsive layouts that work across all devices</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section" id="intro">
+                <h2>Introduction</h2>
+                <p>Modern CSS has evolved tremendously, giving developers powerful tools to create sophisticated layouts without relying on external frameworks. In this comprehensive guide, we'll explore CSS Grid and Flexbox - two revolutionary layout systems that have transformed how we build responsive websites.</p>
+                <p>Whether you're building a simple blog or a complex web application, mastering these techniques will make your development workflow faster and your layouts more maintainable.</p>
+            </div>
+
+            <div class="section" id="grid">
+                <h2>1. CSS Grid - The Two-Dimensional Layout System</h2>
+                <p>CSS Grid is perfect for creating complex, two-dimensional layouts. It allows you to control both rows and columns simultaneously, making it ideal for page layouts, image galleries, and dashboard interfaces.</p>
+
+                <h3>Basic Grid Setup</h3>
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="comment">/* Create a responsive grid layout */</span></span>
+<span class="line"><span class="selector">.grid-container</span> {</span>
+<span class="line">  <span class="property">display</span>: <span class="value">grid</span>;</span>
+<span class="line">  <span class="property">grid-template-columns</span>: <span class="keyword">repeat</span>(<span class="keyword">auto-fit</span>, <span class="keyword">minmax</span>(<span class="value">250px</span>, <span class="value">1fr</span>));</span>
+<span class="line">  <span class="property">gap</span>: <span class="value">20px</span>;</span>
+<span class="line">  <span class="property">padding</span>: <span class="value">20px</span>;</span>
+<span class="line">}</span></code>
+                </div>
+
+                <!-- Interactive Playground -->
+                <div class="playground">
+                    <span class="playground-label">🎮 Interactive Grid Playground</span>
+                    <div class="playground-controls">
+                        <div class="control-group">
+                            <label>Columns: <span class="control-value" id="colValue">3</span></label>
+                            <input type="range" id="colSlider" min="1" max="6" value="3">
+                        </div>
+                        <div class="control-group">
+                            <label>Gap: <span class="control-value" id="gapValue">20px</span></label>
+                            <input type="range" id="gapSlider" min="5" max="50" value="20">
+                        </div>
+                        <div class="control-group">
+                            <label>Alignment:</label>
+                            <select id="alignSelect">
+                                <option value="start">Start</option>
+                                <option value="center">Center</option>
+                                <option value="end">End</option>
+                                <option value="stretch" selected>Stretch</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="playground-preview" id="gridPlayground">
+                        <div class="playground-item">Item 1</div>
+                        <div class="playground-item">Item 2</div>
+                        <div class="playground-item">Item 3</div>
+                        <div class="playground-item">Item 4</div>
+                        <div class="playground-item">Item 5</div>
+                        <div class="playground-item">Item 6</div>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <span class="demo-label">🎨 Live Demo</span>
+                    <div class="grid-demo">
+                        <div class="grid-item">Item 1</div>
+                        <div class="grid-item">Item 2</div>
+                        <div class="grid-item">Item 3</div>
+                        <div class="grid-item">Item 4</div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Pro Tip:</strong>
+                    Use <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px; color: #2d3748; font-size: 0.9em;">auto-fit</code> with <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px; color: #2d3748; font-size: 0.9em;">minmax()</code> for truly responsive grids that adapt to any screen size without media queries!
+                </div>
+            </div>
+
+            <div class="section" id="flexbox">
+                <h2>2. Flexbox - The One-Dimensional Layout Master</h2>
+                <p>Flexbox excels at distributing space along a single axis (row or column). It's perfect for navigation bars, card layouts, and centering content both vertically and horizontally.</p>
+
+                <h3>Flexible Navigation Bar</h3>
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="comment">/* Perfect centered layout with Flexbox */</span></span>
+<span class="line"><span class="selector">.flex-container</span> {</span>
+<span class="line">  <span class="property">display</span>: <span class="value">flex</span>;</span>
+<span class="line">  <span class="property">justify-content</span>: <span class="value">space-between</span>;</span>
+<span class="line">  <span class="property">align-items</span>: <span class="value">center</span>;</span>
+<span class="line">  <span class="property">gap</span>: <span class="value">15px</span>;</span>
+<span class="line">  <span class="property">flex-wrap</span>: <span class="value">wrap</span>;</span>
+<span class="line">}</span></code>
+                </div>
+
+                <div class="demo-box">
+                    <span class="demo-label">🎨 Live Demo</span>
+                    <div class="flex-demo">
+                        <div class="flex-item">Flex 1</div>
+                        <div class="flex-item">Flex 2</div>
+                        <div class="flex-item">Flex 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="combining">
+                <h2>3. Combining Grid and Flexbox</h2>
+                <p>The real power comes from combining both systems. Use Grid for your overall page layout and Flexbox for components within those grid areas.</p>
+
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="comment">/* Modern dashboard layout */</span></span>
+<span class="line"><span class="selector">.dashboard</span> {</span>
+<span class="line">  <span class="property">display</span>: <span class="value">grid</span>;</span>
+<span class="line">  <span class="property">grid-template-areas</span>: </span>
+<span class="line">    <span class="value">"header header header"</span></span>
+<span class="line">    <span class="value">"sidebar content content"</span></span>
+<span class="line">    <span class="value">"footer footer footer"</span>;</span>
+<span class="line">  <span class="property">grid-template-columns</span>: <span class="value">250px 1fr 1fr</span>;</span>
+<span class="line">  <span class="property">gap</span>: <span class="value">20px</span>;</span>
+<span class="line">  <span class="property">min-height</span>: <span class="value">100vh</span>;</span>
+<span class="line">}</span></code>
+                </div>
+            </div>
+
+            <div class="section" id="modern">
+                <h2>4. Modern CSS Features to Level Up</h2>
+                
+                <h3>CSS Custom Properties (Variables)</h3>
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="selector">:root</span> {</span>
+<span class="line">  <span class="property">--primary-color</span>: <span class="value">#667eea</span>;</span>
+<span class="line">  <span class="property">--secondary-color</span>: <span class="value">#764ba2</span>;</span>
+<span class="line">  <span class="property">--spacing</span>: <span class="value">20px</span>;</span>
+<span class="line">  <span class="property">--border-radius</span>: <span class="value">12px</span>;</span>
+<span class="line">}</span></code>
+                </div>
+
+                <h3>Container Queries (Now Supported!)</h3>
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="comment">/* Responsive based on container, not viewport */</span></span>
+<span class="line"><span class="selector">.container</span> {</span>
+<span class="line">  <span class="property">container-type</span>: <span class="value">inline-size</span>;</span>
+<span class="line">}</span>
+<span class="line"></span>
+<span class="line"><span class="keyword">@container</span> (<span class="property">min-width</span>: <span class="value">500px</span>) {</span>
+<span class="line">  <span class="selector">.card</span> {</span>
+<span class="line">    <span class="property">display</span>: <span class="value">flex</span>;</span>
+<span class="line">    <span class="property">gap</span>: <span class="value">20px</span>;</span>
+<span class="line">  }</span>
+<span class="line">}</span></code>
+                </div>
+            </div>
+
+            <div class="section" id="pricing">
+                <h2>5. Real-World Example: Pricing Table with Grid</h2>
+                <p>Let's put everything into practice with a professional pricing table. This example demonstrates Grid layout, custom properties, gradients, and responsive design - all working together.</p>
+
+                <h3>The Code</h3>
+                <div class="code-block code-with-lines">
+                    <div class="code-header">
+                        <span class="code-lang">CSS</span>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <span>📋 Copy</span>
+                            </button>
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <code><span class="line"><span class="comment">/* Responsive pricing grid */</span></span>
+<span class="line"><span class="selector">.pricing-grid</span> {</span>
+<span class="line">  <span class="property">display</span>: <span class="value">grid</span>;</span>
+<span class="line">  <span class="property">grid-template-columns</span>: <span class="keyword">repeat</span>(<span class="keyword">auto-fit</span>, <span class="keyword">minmax</span>(<span class="value">280px</span>, <span class="value">1fr</span>));</span>
+<span class="line">  <span class="property">gap</span>: <span class="value">30px</span>;</span>
+<span class="line">  <span class="property">margin</span>: <span class="value">40px 0</span>;</span>
+<span class="line">}</span></code>
+                </div>
+
+                <div class="demo-box">
+                    <span class="demo-label">🎨 Live Pricing Table Demo</span>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="pricing-header basic">
+                                <h3>Basic</h3>
+                                <div class="price">
+                                    <span class="currency">$</span>
+                                    <span class="amount">9</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <div class="pricing-body">
+                                <ul class="features">
+                                    <li>✓ 5 Projects</li>
+                                    <li>✓ 10GB Storage</li>
+                                    <li>✓ Email Support</li>
+                                    <li>✓ Basic Analytics</li>
+                                </ul>
+                                <button class="pricing-btn basic-btn" onclick="alert('🎉 Thanks for choosing Basic! In a real site, this would redirect to checkout.')">Get Started</button>
+                            </div>
+                        </div>
+
+                        <div class="pricing-card featured">
+                            <div class="pricing-badge">Most Popular</div>
+                            <div class="pricing-header pro">
+                                <h3>Professional</h3>
+                                <div class="price">
+                                    <span class="currency">$</span>
+                                    <span class="amount">29</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <div class="pricing-body">
+                                <ul class="features">
+                                    <li>✓ Unlimited Projects</li>
+                                    <li>✓ 100GB Storage</li>
+                                    <li>✓ Priority Support</li>
+                                    <li>✓ Advanced Analytics</li>
+                                    <li>✓ Custom Domain</li>
+                                </ul>
+                                <button class="pricing-btn pro-btn" onclick="alert('🎉 Thanks for choosing Pro! In a real site, this would redirect to checkout.')">Get Started</button>
+                            </div>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="pricing-header enterprise">
+                                <h3>Enterprise</h3>
+                                <div class="price">
+                                    <span class="currency">$</span>
+                                    <span class="amount">99</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <div class="pricing-body">
+                                <ul class="features">
+                                    <li>✓ Everything in Pro</li>
+                                    <li>✓ Unlimited Storage</li>
+                                    <li>✓ 24/7 Phone Support</li>
+                                    <li>✓ Dedicated Manager</li>
+                                    <li>✓ Custom Integration</li>
+                                </ul>
+                                <button class="pricing-btn enterprise-btn" onclick="alert('🎉 Thanks for your interest in Enterprise! In a real site, this would open a contact form.')">Contact Sales</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Design Tip:</strong>
+                    Notice how the "Most Popular" card stands out with a badge and stronger shadow. This visual hierarchy guides users toward your preferred plan while keeping all options visible.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Key Takeaways</h2>
+                <p><strong>✅ Use CSS Grid when:</strong> You need control over both rows and columns, creating page layouts, or building complex structured interfaces.</p>
+                <p><strong>✅ Use Flexbox when:</strong> You're aligning items in a single direction, creating navigation menus, or centering content.</p>
+                <p><strong>✅ Combine both:</strong> Grid for macro-layout, Flexbox for micro-layout within components.</p>
+                <p><strong>✅ Modern CSS:</strong> Leverage custom properties, container queries, and other modern features for maintainable, scalable code.</p>
+            </div>
+
+            <!-- Social Share Section -->
+            <div class="social-share">
+                <h3>📢 Found this helpful? Share it!</h3>
+                <div class="social-buttons">
+                    <button class="social-btn twitter" onclick="shareOnTwitter()">
+                        🐦 Share on Twitter
+                    </button>
+                    <button class="social-btn linkedin" onclick="shareOnLinkedIn()">
+                        💼 Share on LinkedIn
+                    </button>
+                    <button class="social-btn facebook" onclick="shareOnFacebook()">
+                        👍 Share on Facebook
+                    </button>
+                </div>
+            </div>
+
+            <div class="author-box">
+                <div class="author-avatar">TB</div>
+                <div class="author-info">
+                    <h3>Titus T. Bangura</h3>
+                    <p>Diploma Software Engineer | Freetown, Sierra Leone</p>
+                    <p>Passionate about building modern web experiences and sharing knowledge with the developer community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const html = document.documentElement;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Table of Contents Toggle
+        const toc = document.getElementById('toc');
+        const tocToggle = document.getElementById('tocToggle');
+        
+        tocToggle.addEventListener('click', () => {
+            toc.classList.toggle('hidden');
+        });
+
+        // Smooth Scroll for TOC Links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                target.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active state
+                document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // Scroll Animation for Sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Copy Code Functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code').innerText;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<span>✅ Copied!</span>';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Interactive Grid Playground
+        const gridPlayground = document.getElementById('gridPlayground');
+        const colSlider = document.getElementById('colSlider');
+        const gapSlider = document.getElementById('gapSlider');
+        const alignSelect = document.getElementById('alignSelect');
+        const colValue = document.getElementById('colValue');
+        const gapValue = document.getElementById('gapValue');
+
+        colSlider.addEventListener('input', (e) => {
+            const cols = e.target.value;
+            colValue.textContent = cols;
+            gridPlayground.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        });
+
+        gapSlider.addEventListener('input', (e) => {
+            const gap = e.target.value;
+            gapValue.textContent = gap + 'px';
+            gridPlayground.style.gap = gap + 'px';
+        });
+
+        alignSelect.addEventListener('change', (e) => {
+            gridPlayground.style.alignItems = e.target.value;
+        });
+
+        // Social Share Functions
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Check out this awesome guide on Modern CSS Techniques! 🚀');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+
+        // Initialize first section as visible
+        document.querySelector('.section').classList.add('visible');
+    </script>
+</body>
+</html>
