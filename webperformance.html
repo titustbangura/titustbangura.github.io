@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Performance Optimization: Speed Up Your Website | Performance Tips & Techniques</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Practical tips and techniques to improve your website's loading speed and overall performance for better user experience. Learn optimization strategies, best practices, and tools.">
+    <meta name="keywords" content="web performance, optimization, loading speed, user experience, website speed, performance tips, web development, optimization techniques">
+    <meta name="author" content="Titus T. Bangura">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://yourwebsite.com/web-performance-optimization">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourwebsite.com/web-performance-optimization">
+    <meta property="og:title" content="Web Performance Optimization: Speed Up Your Website | Performance Tips & Techniques">
+    <meta property="og:description" content="Practical tips and techniques to improve your website's loading speed and overall performance for better user experience. Learn optimization strategies.">
+    <meta property="og:image" content="https://yourwebsite.com/images/web-performance-og.jpg">
+    <meta property="og:site_name" content="Your Website Name">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/web-performance-optimization">
+    <meta property="twitter:title" content="Web Performance Optimization: Speed Up Your Website | Performance Tips & Techniques">
+    <meta property="twitter:description" content="Practical tips and techniques to improve your website's loading speed and overall performance for better user experience. Learn optimization strategies.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/web-performance-twitter.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Web Performance Optimization: Speed Up Your Website",
+        "description": "Practical tips and techniques to improve your website's loading speed and overall performance for better user experience. Learn optimization strategies, best practices, and tools.",
+        "image": "https://yourwebsite.com/images/web-performance-og.jpg",
+        "datePublished": "2024-09-30",
+        "author": {
+            "@type": "Person",
+            "name": "Titus T. Bangura",
+            "jobTitle": "Diploma Software Engineer",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Freetown",
+                "addressCountry": "Sierra Leone"
+            }
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Your Website Name"
+        }
+    }
+    </script>
+
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main id="main-content">
+        <article class="content">
+            <header class="article-header">
+                <h1>Web Performance Optimization: Speed Up Your Website</h1>
+                <div class="meta">
+                    <time datetime="2024-09-30">Sep 30, 2024</time>
+                    <span class="category">Performance</span>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <p>Practical tips and techniques to improve your website's loading speed and overall performance for better user experience. In today's fast-paced digital world, users expect websites to load quickly. A slow site can lead to higher bounce rates, lower conversion rates, and poor search engine rankings.</p>
+
+                <nav class="table-of-contents">
+                    <h2>Table of Contents</h2>
+                    <ul>
+                        <li><a href="#why-performance-matters">Why Performance Matters</a></li>
+                        <li><a href="#core-web-vitals">Core Web Vitals</a></li>
+                        <li><a href="#optimization-techniques">Key Optimization Techniques</a></li>
+                        <li><a href="#frontend-optimization">Frontend Optimization</a></li>
+                        <li><a href="#backend-optimization">Backend Optimization</a></li>
+                        <li><a href="#monitoring-tools">Monitoring and Tools</a></li>
+                        <li><a href="#performance-budget">Setting Performance Budgets</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </nav>
+                
+                <section id="why-performance-matters">
+                    <h2>Why Performance Matters</h2>
+                    <p>Website performance directly impacts user experience, conversion rates, and search engine rankings. Studies show that:</p>
+                    <ul>
+                        <li>53% of mobile users abandon sites that take longer than 3 seconds to load</li>
+                        <li>Every 1-second delay in page load time can reduce conversions by up to 7%</li>
+                        <li>Google uses page speed as a ranking factor in search results</li>
+                        <li>Fast websites have 20% higher conversion rates than slow ones</li>
+                    </ul>
+                </section>
+
+                <section id="core-web-vitals" class="performance-cards">
+                    <div class="card">
+                        <h3>Largest Contentful Paint (LCP)</h3>
+                        <div class="metric">2.5s</div>
+                        <p>Target: Under 2.5 seconds<br>Measures loading performance</p>
+                    </div>
+                    <div class="card">
+                        <h3>First Input Delay (FID)</h3>
+                        <div class="metric">100ms</div>
+                        <p>Target: Under 100ms<br>Measures interactivity</p>
+                    </div>
+                    <div class="card">
+                        <h3>Cumulative Layout Shift (CLS)</h3>
+                        <div class="metric">0.1</div>
+                        <p>Target: Under 0.1<br>Measures visual stability</p>
+                    </div>
+                </section>
+
+                <section id="optimization-techniques">
+                    <h2>Key Optimization Techniques</h2>
+                    <h3>1. Image Optimization</h3>
+                    <p>Images often account for the majority of a webpage's file size. Optimize them using modern formats and compression:</p>
+                    <pre><code>&lt;!-- Use WebP with fallbacks --&gt;
+&lt;picture&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;img src="image.jpg" alt="Description" loading="lazy"&gt;
+&lt;/picture&gt;
+
+&lt;!-- Or use responsive images --&gt;
+&lt;img src="image-small.jpg"
+     srcset="image-small.jpg 480w,
+             image-medium.jpg 768w,
+             image-large.jpg 1024w"
+     sizes="(max-width: 480px) 100vw,
+            (max-width: 768px) 50vw,
+            33vw"
+     alt="Responsive image"&gt;</code></pre>
+
+                    <h3>2. Minify and Compress Resources</h3>
+                    <p>Minify CSS, JavaScript, and HTML files, and enable gzip/Brotli compression on your server:</p>
+                    <pre><code># Enable Brotli compression (preferred over gzip)
+&lt;IfModule mod_brotli.c&gt;
+  AddOutputFilterByType BROTLI_COMPRESS text/plain
+  AddOutputFilterByType BROTLI_COMPRESS text/html
+  AddOutputFilterByType BROTLI_COMPRESS text/xml
+  AddOutputFilterByType BROTLI_COMPRESS text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/xhtml+xml
+  AddOutputFilterByType BROTLI_COMPRESS application/rss+xml
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
+&lt;/IfModule&gt;</code></pre>
+                </section>
+
+                <section id="frontend-optimization">
+                    <h2>Frontend Optimization</h2>
+                    
+                    <h3>Leverage Browser Caching</h3>
+                    <p>Set appropriate cache headers to reduce server requests for returning visitors:</p>
+                    <pre><code># Cache static assets for 1 year
+&lt;IfModule mod_expires.c&gt;
+  ExpiresActive on
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+&lt;/IfModule&gt;</code></pre>
+
+                    <h3>Optimize Critical Rendering Path</h3>
+                    <p>Prioritize loading above-the-fold content and defer non-critical resources:</p>
+                    <pre><code>&lt;!-- Load critical CSS inline --&gt;
+&lt;style&gt;
+  /* Critical CSS here - only what's needed for initial render */
+  body { font-family: 'Inter', sans-serif; margin: 0; }
+  .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+&lt;/style&gt;
+
+&lt;!-- Preload critical resources --&gt;
+&lt;link rel="preload" href="critical-font.woff2" as="font" type="font/woff2" crossorigin&gt;
+
+&lt;!-- Defer non-critical CSS --&gt;
+&lt;link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"&gt;
+&lt;noscript&gt;&lt;link rel="stylesheet" href="styles.css"&gt;&lt;/noscript&gt;</code></pre>
+
+                    <h3>JavaScript Optimization</h3>
+                    <ul>
+                        <li><strong>Code Splitting:</strong> Break large bundles into smaller chunks</li>
+                        <li><strong>Tree Shaking:</strong> Remove unused code with bundlers like Webpack</li>
+                        <li><strong>Defer/Async Loading:</strong> Load scripts without blocking rendering</li>
+                        <li><strong>Service Workers:</strong> Enable offline functionality and caching</li>
+                    </ul>
+
+                    <h3>Font Loading Optimization</h3>
+                    <pre><code>&lt;!-- Preload critical fonts --&gt;
+&lt;link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin&gt;
+
+&lt;!-- Use font-display: swap to prevent invisible text --&gt;
+@font-face {
+  font-family: 'Inter';
+  src: url('inter.woff2') format('woff2');
+  font-display: swap;
+}</code></pre>
+                </section>
+
+                <section id="backend-optimization">
+                    <h2>Backend Optimization</h2>
+                    
+                    <h3>Server Response Time</h3>
+                    <p>Optimize your server to respond quickly:</p>
+                    <ul>
+                        <li>Use a fast hosting provider or CDN</li>
+                        <li>Implement caching (Redis, Memcached)</li>
+                        <li>Optimize database queries</li>
+                        <li>Use HTTP/2 or HTTP/3</li>
+                        <li>Enable server-side compression</li>
+                    </ul>
+
+                    <h3>Database Optimization</h3>
+                    <pre><code>-- Add indexes to frequently queried columns
+CREATE INDEX idx_user_email ON users(email);
+CREATE INDEX idx_posts_created_at ON posts(created_at DESC);
+
+-- Use EXPLAIN to analyze query performance
+EXPLAIN SELECT * FROM users WHERE email = 'user@example.com';</code></pre>
+
+                    <h3>Content Delivery Network (CDN)</h3>
+                    <p>CDNs distribute your content across multiple servers worldwide:</p>
+                    <ul>
+                        <li>Reduced latency for global users</li>
+                        <li>Automatic compression and optimization</li>
+                        <li>DDoS protection</li>
+                        <li>Edge computing capabilities</li>
+                    </ul>
+                </section>
+
+                <section id="monitoring-tools">
+                    <h2>Monitoring and Tools</h2>
+                    <p>Use these tools to regularly monitor your site's performance and identify areas for improvement:</p>
+                    
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <h4>Google PageSpeed Insights</h4>
+                            <p>Free tool that analyzes your page and provides suggestions for improvement.</p>
+                            <a href="https://pagespeed.web.dev/" target="_blank" rel="noopener">Test your site</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Lighthouse</h4>
+                            <p>Automated tool for improving web page quality, built into Chrome DevTools.</p>
+                            <code>Chrome DevTools → Lighthouse</code>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>WebPageTest</h4>
+                            <p>Detailed performance analysis with waterfall charts and filmstrip view.</p>
+                            <a href="https://www.webpagetest.org/" target="_blank" rel="noopener">Run test</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>GTmetrix</h4>
+                            <p>Performance monitoring with historical data and actionable recommendations.</p>
+                            <a href="https://gtmetrix.com/" target="_blank" rel="noopener">Analyze now</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Chrome DevTools</h4>
+                            <p>Built-in browser tools for performance profiling and debugging.</p>
+                            <code>F12 → Performance tab</code>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Core Web Vitals Report</h4>
+                            <p>Google Search Console report showing real-user performance data.</p>
+                            <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Check report</a>
+                        </div>
+                    </div>
+
+                    <h3>Performance Metrics to Track</h3>
+                    <ul>
+                        <li><strong>Core Web Vitals:</strong> LCP, FID, CLS</li>
+                        <li><strong>Time to First Byte (TTFB):</strong> Server response time</li>
+                        <li><strong>Total Blocking Time (TBT):</strong> Time spent blocking main thread</li>
+                        <li><strong>First Contentful Paint (FCP):</strong> When first content appears</li>
+                        <li><strong>Speed Index:</strong> How quickly content is visually displayed</li>
+                        <li><strong>Lighthouse Performance Score:</strong> Overall performance rating</li>
+                    </ul>
+                </section>
+
+                <section id="performance-budget">
+                    <h2>Setting Performance Budgets</h2>
+                    <p>A performance budget defines the limits for your site's key metrics. Set realistic targets and monitor them:</p>
+                    
+                    <div class="budget-table">
+                        <div class="budget-row">
+                            <span class="metric-name">Bundle Size</span>
+                            <span class="budget-value">≤ 170KB (gzipped)</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="metric-name">First Contentful Paint</span>
+                            <span class="budget-value">≤ 1.5 seconds</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="metric-name">Largest Contentful Paint</span>
+                            <span class="budget-value">≤ 2.5 seconds</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="metric-name">Cumulative Layout Shift</span>
+                            <span class="budget-value">≤ 0.1</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="metric-name">Total Blocking Time</span>
+                            <span class="budget-value">≤ 200ms</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="metric-name">Lighthouse Score</span>
+                            <span class="budget-value">≥ 90</span>
+                        </div>
+                    </div>
+
+                    <h3>Implementing Budgets</h3>
+                    <pre><code>// package.json - Bundle size budget
+{
+  "scripts": {
+    "build": "webpack --mode production",
+    "analyze": "webpack-bundle-analyzer dist/static/js/*.js"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^4.5.0",
+    "bundlesize": "^0.18.1"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/static/js/*.js",
+      "maxSize": "170 kB"
+    }
+  ]
+}
+
+// Lighthouse CI for automated testing
+// .github/workflows/lighthouse.yml
+name: Lighthouse CI
+on: [push]
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install
+      - run: npm run build
+      - uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: ${{ secrets.URL }}
+          configPath: .lighthouserc.json</code></pre>
+                </section>
+
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>Web performance optimization is an ongoing process that requires regular monitoring and updates. By implementing these techniques, you can significantly improve your website's speed, user experience, and search engine rankings.</p>
+                    
+                    <div class="action-items">
+                        <h3>Next Steps</h3>
+                        <ol>
+                            <li>Run a performance audit using Lighthouse or PageSpeed Insights</li>
+                            <li>Identify your biggest performance bottlenecks</li>
+                            <li>Set up performance budgets and monitoring</li>
+                            <li>Implement optimizations incrementally</li>
+                            <li>Monitor Core Web Vitals in Search Console</li>
+                            <li>Consider automated performance testing in CI/CD</li>
+                        </ol>
+                    </div>
+                    
+                    <p>Remember: Performance optimization is not a one-time task. Websites evolve, user expectations change, and new technologies emerge. Regular monitoring and continuous improvement are key to maintaining optimal performance.</p>
+                    
+                    <div class="cta">
+                        <p>Want to learn more about web performance? Check out these resources:</p>
+                        <ul>
+                            <li><a href="https://web.dev/learn/" target="_blank" rel="noopener">web.dev Learning</a></li>
+                            <li><a href="https://developers.google.com/web/fundamentals" target="_blank" rel="noopener">Google Web Fundamentals</a></li>
+                            <li><a href="https://www.smashingmagazine.com/guides/" target="_blank" rel="noopener">Smashing Magazine Performance Guides</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Web Performance Guide. Built with ❤️ for faster web.</p>
+            <p>Written by Titus T. Bangura</p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
+</body>
+</html>
