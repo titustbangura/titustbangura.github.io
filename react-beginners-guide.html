@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with React: A Beginner's Guide</title>
+    <link rel="stylesheet" href="react-beginners-guide.css">
+
+</head>
+<body>
+    <a id="top"></a>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div class="container">
+        <header class="article-header">
+            <h1>Getting Started with React: A Beginner's Guide</h1>
+            <div class="meta">
+                <span class="author">By Titus T Bangura</span>
+                <span class="date">October 7, 2025</span>
+                <span class="category">Tutorial</span>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="content">
+                <article class="article-content">
+                    <p class="subtitle">Learn the fundamentals of React and start building your first component-based applications with this comprehensive guide...</p>
+
+                    <!-- Table of Contents -->
+                    <div class="table-of-contents">
+                        <h2>Table of Contents</h2>
+                        <ul>
+                            <li><a href="#what-is-react">What is React?</a></li>
+                            <li><a href="#prerequisites">Prerequisites</a></li>
+                            <li><a href="#setup">Setting Up Your Development Environment</a></li>
+                            <li><a href="#first-component">Your First React Component</a></li>
+                            <li><a href="#jsx">Understanding JSX</a></li>
+                            <li><a href="#components-props">Components and Props</a></li>
+                            <li><a href="#state-lifecycle">State and Lifecycle</a></li>
+                            <li><a href="#events">Handling Events</a></li>
+                            <li><a href="#conditional-rendering">Conditional Rendering</a></li>
+                            <li><a href="#lists-keys">Lists and Keys</a></li>
+                            <li><a href="#hooks">React Hooks</a></li>
+                            <li><a href="#context-api">Context API</a></li>
+                            <li><a href="#forms">Forms and Controlled Components</a></li>
+                            <li><a href="#refs">Refs and DOM Access</a></li>
+                            <li><a href="#error-boundaries">Error Boundaries</a></li>
+                            <li><a href="#optimization">Performance Optimization</a></li>
+                            <li><a href="#next-steps">Next Steps</a></li>
+                        </ul>
+                    </div>
+
+                    <section id="what-is-react">
+                        <h2>What is React?</h2>
+                        <p>React is a popular JavaScript library for building user interfaces, particularly web applications. Developed by Facebook (now Meta), React allows developers to create reusable UI components that manage their own state. It's known for its component-based architecture, virtual DOM, and declarative programming style.</p>
+
+                        <div class="highlight">
+                            <strong>Key Benefits:</strong>
+                            <ul>
+                                <li>Component-based architecture for reusable code</li>
+                                <li>Virtual DOM for efficient rendering</li>
+                                <li>One-way data flow for predictable updates</li>
+                                <li>Large ecosystem and community support</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section id="what-is-react">
+                        <h2>What is React?</h2>
+                        <p>React is a popular JavaScript library for building user interfaces, particularly web applications. Developed by Facebook (now Meta), React allows developers to create reusable UI components that manage their own state. It's known for its component-based architecture, virtual DOM, and declarative programming style.</p>
+
+                        <div class="highlight">
+                            <strong>Key Benefits:</strong>
+                            <ul>
+                                <li>Component-based architecture for reusable code</li>
+                                <li>Virtual DOM for efficient rendering</li>
+                                <li>One-way data flow for predictable updates</li>
+                                <li>Large ecosystem and community support</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section id="prerequisites">
+                        <h2>Prerequisites</h2>
+                        <p>Before diving into React, you should have a basic understanding of:</p>
+                        <ul>
+                            <li><strong>HTML & CSS:</strong> Fundamental markup and styling</li>
+                            <li><strong>JavaScript:</strong> ES6+ features like arrow functions, destructuring, and modules</li>
+                            <li><strong>Node.js & npm:</strong> For package management and running React apps</li>
+                            <li><strong>Command Line:</strong> Basic terminal commands</li>
+                        </ul>
+                    </section>
+
+                    <section id="setup">
+                        <h2>Setting Up Your Development Environment</h2>
+                        <h3>1. Install Node.js</h3>
+                        <p>Download and install Node.js from the official website (<a href="https://nodejs.org" target="_blank">nodejs.org</a>). This includes npm (Node Package Manager).</p>
+
+                        <h3>2. Create a New React App</h3>
+                        <p>Use Create React App to set up a new project:</p>
+                        <pre><code>npx create-react-app my-first-react-app
+cd my-first-react-app
+npm start</code></pre>
+
+                        <h3>3. Project Structure</h3>
+                        <p>After creating your app, you'll see a structure like this:</p>
+                        <pre><code>my-first-react-app/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   └── index.css
+├── package.json
+└── README.md</code></pre>
+                    </section>
+
+                    <section id="first-component">
+                        <h2>Your First React Component</h2>
+                        <p>Let's create a simple "Hello World" component. Open <code>src/App.js</code> and replace its contents:</p>
+
+                        <div class="code-example">
+                            <pre><code>import React from 'react';
+import './App.css';
+
+function App() {
+  return (
+    &lt;div className="App"&gt;
+      &lt;header className="App-header"&gt;
+        &lt;h1&gt;Hello, React World!&lt;/h1&gt;
+        &lt;p&gt;Welcome to your first React component.&lt;/p&gt;
+      &lt;/header&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="jsx">
+                        <h2>Understanding JSX</h2>
+                        <p>JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files. It's not required but makes React code more readable.</p>
+
+                        <div class="code-example">
+                            <pre><code>// JSX
+const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;
+
+// Equivalent JavaScript
+const element = React.createElement('h1', null, 'Hello, world!');</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="components-props">
+                        <h2>Components and Props</h2>
+                        <p>Components are the building blocks of React applications. Props (properties) allow you to pass data from parent to child components.</p>
+
+                        <div class="code-example">
+                            <pre><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Welcome name="Alice" /&gt;
+      &lt;Welcome name="Bob" /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="state-lifecycle">
+                        <h2>State and Lifecycle</h2>
+                        <p>State allows components to manage their own data that can change over time. Use the <code>useState</code> hook for functional components:</p>
+
+                        <div class="code-example">
+                            <pre><code>import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="events">
+                        <h2>Handling Events</h2>
+                        <p>React events are similar to DOM events but use camelCase naming:</p>
+
+                        <div class="code-example">
+                            <pre><code>function ActionButton() {
+  function handleClick() {
+    alert('Button clicked!');
+  }
+
+  return (
+    &lt;button onClick={handleClick}&gt;
+      Click Me
+    &lt;/button&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="conditional-rendering">
+                        <h2>Conditional Rendering</h2>
+                        <p>You can conditionally render components using JavaScript operators:</p>
+
+                        <div class="code-example">
+                            <pre><code>function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return &lt;h1&gt;Welcome back!&lt;/h1&gt;;
+  }
+  return &lt;h1&gt;Please sign up.&lt;/h1&gt;;
+}
+
+// Or using ternary operator
+function Greeting(props) {
+  return (
+    &lt;h1&gt;
+      {props.isLoggedIn ? 'Welcome back!' : 'Please sign up.'}
+    &lt;/h1&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="lists-keys">
+                        <h2>Lists and Keys</h2>
+                        <p>When rendering lists, use the <code>map()</code> function and provide a unique <code>key</code> prop:</p>
+
+                        <div class="code-example">
+                            <pre><code>function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =&gt;
+    &lt;li key={number.toString()}&gt;
+      {number}
+    &lt;/li&gt;
+  );
+  return (
+    &lt;ul&gt;{listItems}&lt;/ul&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="hooks">
+                        <h2>React Hooks</h2>
+                        <p>Hooks are functions that let you "hook into" React state and lifecycle features from function components. The most important hooks for beginners are <code>useState</code>, <code>useEffect</code>, and <code>useContext</code>.</p>
+
+                        <h3>useEffect Hook</h3>
+                        <p>The <code>useEffect</code> hook lets you perform side effects in function components:</p>
+
+                        <div class="code-example">
+                            <pre><code>import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="context-api">
+                        <h2>Context API</h2>
+                        <p>Context provides a way to pass data through the component tree without having to pass props down manually at every level. It's useful for global state like themes or user authentication.</p>
+
+                        <div class="code-example">
+                            <pre><code>// Create a context
+const ThemeContext = React.createContext('light');
+
+// Provider component
+function App() {
+  return (
+    &lt;ThemeContext.Provider value="dark"&gt;
+      &lt;Toolbar /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+// Consumer component
+function ThemedButton() {
+  return (
+    &lt;ThemeContext.Consumer&gt;
+      {theme =&gt; &lt;button className={theme}&gt;Button&lt;/button&gt;}
+    &lt;/ThemeContext.Consumer&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="forms">
+                        <h2>Forms and Controlled Components</h2>
+                        <p>In React, form elements maintain their own state. A controlled component is one where React controls the form value.</p>
+
+                        <div class="code-example">
+                            <pre><code>function NameForm() {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) =&gt; {
+    setValue(event.target.value);
+  }
+
+  const handleSubmit = (event) =&gt; {
+    alert('A name was submitted: ' + value);
+    event.preventDefault();
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;label&gt;
+        Name:
+        &lt;input type="text" value={value} onChange={handleChange} /&gt;
+      &lt;/label&gt;
+      &lt;input type="submit" value="Submit" /&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="refs">
+                        <h2>Refs and DOM Access</h2>
+                        <p>Refs provide a way to access DOM nodes or React elements created in the render method. They're useful when you need to imperatively modify a child or access a DOM element.</p>
+
+                        <div class="code-example">
+                            <pre><code>import React, { useRef } from 'react';
+
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  
+  const onButtonClick = () =&gt; {
+    // `current` points to the mounted text input element
+    inputEl.current.focus();
+  };
+  
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputEl} type="text" /&gt;
+      &lt;button onClick={onButtonClick}&gt;Focus the input&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="error-boundaries">
+                        <h2>Error Boundaries</h2>
+                        <p>Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI.</p>
+
+                        <div class="code-example">
+                            <pre><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.log('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Usage
+&lt;ErrorBoundary&gt;
+  &lt;MyComponent /&gt;
+&lt;/ErrorBoundary&gt;</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="optimization">
+                        <h2>Performance Optimization</h2>
+                        <p>React provides several ways to optimize performance. The most common techniques include using <code>React.memo</code>, <code>useMemo</code>, and <code>useCallback</code>.</p>
+
+                        <h3>React.memo</h3>
+                        <div class="code-example">
+                            <pre><code>const MyComponent = React.memo(function MyComponent(props) {
+  return &lt;div&gt;{props.value}&lt;/div&gt;;
+});</code></pre>
+                        </div>
+
+                        <h3>useMemo and useCallback</h3>
+                        <div class="code-example">
+                            <pre><code>const memoizedValue = useMemo(() =&gt; computeExpensiveValue(a, b), [a, b]);
+const memoizedCallback = useCallback(() =&gt; { doSomething(a, b); }, [a, b]);</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="next-steps">
+                        <h2>Next Steps</h2>
+                        <p>Now that you have the basics, here are some next steps to continue your React journey:</p>
+                        <ul>
+                            <li>Learn about React Router for navigation</li>
+                            <li>Explore state management with Redux or Context API</li>
+                            <li>Study React Hooks in depth</li>
+                            <li>Build a complete application</li>
+                            <li>Join the React community and contribute to open-source projects</li>
+                        </ul>
+
+                        <div id="resources" class="resources-section">
+                            <h3>📚 Recommended Resources</h3>
+                            <div class="resources-grid">
+                                <a href="https://reactjs.org/docs/getting-started.html" target="_blank" class="resource-link">
+                                    <div class="resource-card">
+                                        <div class="resource-icon">📖</div>
+                                        <div class="resource-content">
+                                            <h4>Official React Documentation</h4>
+                                            <p>The official guide and API reference</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="https://reactjs.org/tutorial/tutorial.html" target="_blank" class="resource-link">
+                                    <div class="resource-card">
+                                        <div class="resource-icon">🎯</div>
+                                        <div class="resource-content">
+                                            <h4>React Tutorial</h4>
+                                            <p>Interactive tutorial to build your first React app</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="https://www.freecodecamp.org/learn/front-end-development-libraries/react/" target="_blank" class="resource-link">
+                                    <div class="resource-card">
+                                        <div class="resource-icon">🚀</div>
+                                        <div class="resource-content">
+                                            <h4>freeCodeCamp React Course</h4>
+                                            <p>Comprehensive video course with hands-on projects</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </main>
+
+        <div class="cta">
+            <p>Ready to start building with React?</p>
+            <ul>
+                <li><a href="https://reactjs.org" target="_blank">Get Started</a></li>
+                <li><a href="https://reactjs.org/docs/getting-started.html" target="_blank">Documentation</a></li>
+                <li><a href="https://reactjs.org/tutorial/tutorial.html" target="_blank">Tutorial</a></li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Happy coding! 🚀</p>
+            <p>Created by <strong>Titus T Bangura</strong></p>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" aria-label="Back to top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18,15 12,9 6,15"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Reading Progress Bar
+        window.addEventListener('scroll', function() {
+            const progressBar = document.getElementById('progress-bar');
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Table of Contents active link highlighting
+        const tocLinks = document.querySelectorAll('.table-of-contents a');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Copy code functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('pre');
+            
+            codeBlocks.forEach(block => {
+                const button = document.createElement('button');
+                button.className = 'copy-button';
+                button.innerHTML = 'Copy code';
+                block.appendChild(button);
+                
+                button.addEventListener('click', function() {
+                    const code = block.querySelector('code');
+                    if (code) {
+                        navigator.clipboard.writeText(code.textContent).then(function() {
+                            button.textContent = 'Copied!';
+                            button.classList.add('copied');
+                            setTimeout(() => {
+                                button.textContent = 'Copy code';
+                                button.classList.remove('copied');
+                            }, 2000);
+                        });
+                    }
+                });
+            });
+        });
+
+        // Back to Top Button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <script src="Essential-javaScript.js"></script>
+</body>
+</html>
