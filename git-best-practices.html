@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Best Practices for Team Collaboration | Modern Git Guide</title>
+    <meta name="description" content="Learn essential Git workflows and best practices to improve your team's collaboration and code management. Covers branching strategies, pull requests, code reviews, and more.">
+    <meta name="keywords" content="Git, Git best practices, team collaboration, workflows, branching, pull requests, code review, version control">
+    <meta name="author" content="Titus T. Bangura, Diploma Software Student">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://Titus.me/git-best-practices">
+    <link rel="stylesheet" href="Essential-javaScript.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main id="main-content">
+        <article class="content">
+            <header class="article-header">
+                <h1>Git Best Practices for Team Collaboration</h1>
+                <div class="meta">
+                    <time datetime="2024-10-12">Oct 12, 2024</time>
+                    <span class="category">Git</span>
+                </div>
+            </header>
+            <div class="article-content">
+                <nav class="table-of-contents">
+                    <h2>Table of Contents</h2>
+                    <ul>
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#workflows">Git Workflows</a></li>
+                        <li><a href="#branching">Branching Strategies</a></li>
+                        <li><a href="#pull-requests">Pull Requests</a></li>
+                        <li><a href="#code-review">Code Review</a></li>
+                        <li><a href="#commit-messages">Commit Message Guidelines</a></li>
+                        <li><a href="#conflicts">Handling Merge Conflicts</a></li>
+                        <li><a href="#releases">Release Management</a></li>
+                        <li><a href="#automation">Automation & CI/CD</a></li>
+                        <li><a href="#security">Security & Access Control</a></li>
+                        <li><a href="#rebasing">Rebasing vs. Merging</a></li>
+                        <li><a href="#stashing">Stashing Changes</a></li>
+                        <li><a href="#submodules">Submodules</a></li>
+                        <li><a href="#hooks">Git Hooks</a></li>
+                        <li><a href="#tagging">Tagging & Versioning</a></li>
+                        <li><a href="#bisect">Bisecting for Bug Hunting</a></li>
+                        <li><a href="#cherry-pick">Cherry-picking Commits</a></li>
+                        <li><a href="#lfs">Managing Large Files (Git LFS)</a></li>
+                        <li><a href="#aliases">Git Aliases</a></li>
+                        <li><a href="#undo">Undoing Changes</a></li>
+                        <li><a href="#remotes">Working with Remotes</a></li>
+                        <li><a href="#config">Git Configuration & Customization</a></li>
+                        <li><a href="#open-source">Open Source Collaboration</a></li>
+                        <li><a href="#resources">Further Resources</a></li>
+                    </ul>
+                </nav>
+                <section id="intro">
+                    <h2>Introduction</h2>
+                    <p>Git is the backbone of modern software collaboration. Adopting best practices ensures code quality, smooth teamwork, and reliable releases.</p>
+                </section>
+                <section id="workflows">
+                    <h2>Git Workflows</h2>
+                    <ul>
+                        <li><strong>Feature Branch Workflow:</strong> Each feature/fix in its own branch.</li>
+                        <li><strong>Gitflow Workflow:</strong> Structured branching for releases, hotfixes, and features.</li>
+                        <li><strong>Forking Workflow:</strong> Fork the repo, work independently, then submit pull requests.</li>
+                    </ul>
+                </section>
+                <section id="branching">
+                    <h2>Branching Strategies</h2>
+                    <ul>
+                        <li>Use clear branch names (e.g., <code>feature/login</code>, <code>bugfix/header</code>)</li>
+                        <li>Protect main branches (<code>main</code>, <code>develop</code>)</li>
+                        <li>Delete merged branches to keep repo clean</li>
+                    </ul>
+                </section>
+                <section id="pull-requests">
+                    <h2>Pull Requests</h2>
+                    <ul>
+                        <li>Open PRs for all changes</li>
+                        <li>Describe what and why in the PR description</li>
+                        <li>Tag reviewers and assign appropriately</li>
+                    </ul>
+                </section>
+                <section id="code-review">
+                    <h2>Code Review</h2>
+                    <ul>
+                        <li>Review for logic, style, and security</li>
+                        <li>Be constructive and respectful</li>
+                        <li>Approve only when all checks pass</li>
+                    </ul>
+                </section>
+                <section id="commit-messages">
+                    <h2>Commit Message Guidelines</h2>
+                    <ul>
+                        <li>Use present tense: <code>Fix bug</code>, <code>Add feature</code></li>
+                        <li>Keep messages concise but descriptive</li>
+                        <li>Reference issues/tickets when relevant</li>
+                    </ul>
+                </section>
+                <section id="conflicts">
+                    <h2>Handling Merge Conflicts</h2>
+                    <ul>
+                        <li>Pull latest changes before merging</li>
+                        <li>Resolve conflicts locally, test thoroughly</li>
+                        <li>Communicate with team if unsure</li>
+                    </ul>
+                </section>
+                <section id="releases">
+                    <h2>Release Management</h2>
+                    <ul>
+                        <li>Tag releases (<code>v1.0.0</code>)</li>
+                        <li>Maintain changelogs</li>
+                        <li>Automate deployments when possible</li>
+                    </ul>
+                </section>
+                <section id="automation">
+                    <h2>Automation & CI/CD</h2>
+                    <ul>
+                        <li>Use CI/CD pipelines for testing and deployment</li>
+                        <li>Automate code formatting and linting</li>
+                        <li>Integrate with issue tracking</li>
+                    </ul>
+                </section>
+                <section id="security">
+                    <h2>Security & Access Control</h2>
+                    <ul>
+                        <li>Limit write access to main branches</li>
+                        <li>Use signed commits for sensitive changes</li>
+                        <li>Audit repository for secrets and credentials</li>
+                    </ul>
+                </section>
+                <section id="rebasing">
+                    <h2>Rebasing vs. Merging</h2>
+                    <p>Rebase rewrites history for a linear commit tree, while merge preserves all branch history. Use <code>git rebase</code> for clean history, <code>git merge</code> for context.</p>
+                    <pre><code>git checkout feature
+# Merge
+ git merge main
+# Rebase
+ git rebase main
+</code></pre>
+                </section>
+                <section id="stashing">
+                    <h2>Stashing Changes</h2>
+                    <p>Temporarily save changes without committing using <code>git stash</code>.</p>
+                    <pre><code>git stash
+# List stashes
+git stash list
+# Apply last stash
+git stash apply
+</code></pre>
+                </section>
+                <section id="submodules">
+                    <h2>Submodules</h2>
+                    <p>Include other repositories inside your project.</p>
+                    <pre><code>git submodule add https://github.com/example/lib.git lib
+</code></pre>
+                </section>
+                <section id="hooks">
+                    <h2>Git Hooks</h2>
+                    <p>Automate tasks (linting, tests) on events like commit or push.</p>
+                    <pre><code>.git/hooks/pre-commit
+# Add shell script to run tests before commit
+</code></pre>
+                </section>
+                <section id="tagging">
+                    <h2>Tagging & Versioning</h2>
+                    <p>Tag releases for easy reference.</p>
+                    <pre><code>git tag v1.0.0
+git push origin v1.0.0
+</code></pre>
+                </section>
+                <section id="bisect">
+                    <h2>Bisecting for Bug Hunting</h2>
+                    <p>Use <code>git bisect</code> to find the commit that introduced a bug.</p>
+                    <pre><code>git bisect start
+git bisect bad
+git bisect good <commit>
+</code></pre>
+                </section>
+                <section id="cherry-pick">
+                    <h2>Cherry-picking Commits</h2>
+                    <p>Apply a specific commit from one branch to another.</p>
+                    <pre><code>git cherry-pick <commit-hash>
+</code></pre>
+                </section>
+                <section id="lfs">
+                    <h2>Managing Large Files (Git LFS)</h2>
+                    <p>Track large files efficiently using Git LFS.</p>
+                    <pre><code>git lfs install
+git lfs track "*.psd"
+</code></pre>
+                </section>
+                <section id="aliases">
+                    <h2>Git Aliases</h2>
+                    <p>Create shortcuts for common commands.</p>
+                    <pre><code>git config --global alias.co checkout
+git co main
+</code></pre>
+                </section>
+                <section id="undo">
+                    <h2>Undoing Changes</h2>
+                    <p>Reset, revert, or restore changes as needed.</p>
+                    <pre><code>git reset --hard HEAD~1
+# Undo last commit
+git revert <commit>
+# Restore file
+git restore file.txt
+</code></pre>
+                </section>
+                <section id="remotes">
+                    <h2>Working with Remotes</h2>
+                    <p>Add, remove, and manage remote repositories.</p>
+                    <pre><code>git remote add origin https://github.com/user/repo.git
+git remote -v
+</code></pre>
+                </section>
+                <section id="config">
+                    <h2>Git Configuration & Customization</h2>
+                    <p>Customize Git behavior and settings.</p>
+                    <pre><code>git config --global user.name "Your Name"
+git config --global core.editor "vim"
+</code></pre>
+                </section>
+                <section id="open-source">
+                    <h2>Best Practices for Open Source Collaboration</h2>
+                    <ul>
+                        <li>Fork and submit pull requests</li>
+                        <li>Follow contribution guidelines</li>
+                        <li>Communicate clearly in issues and PRs</li>
+                    </ul>
+                </section>
+                <section id="resources">
+                    <h2>Further Resources</h2>
+                    <ul>
+                        <li><a href="https://git-scm.com/book/en/v2" target="_blank">Pro Git Book</a> — The official, comprehensive guide to Git, covering everything from basics to advanced workflows.</li>
+                        <li><a href="https://www.atlassian.com/git/tutorials" target="_blank">Atlassian Git Tutorials</a> — Practical tutorials and guides for real-world Git usage, including branching, merging, and collaboration.</li>
+                        <li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">Gitflow Model</a> — Detailed explanation of the Gitflow branching strategy for managing features, releases, and hotfixes.</li>
+                        <li><a href="https://learngitbranching.js.org/" target="_blank">Learn Git Branching (Interactive)</a> — Visual, hands-on tool for mastering branching and merging in Git.</li>
+                        <li><a href="https://ohmygit.org/" target="_blank">Oh My Git!</a> — Open-source interactive Git learning game.</li>
+                        <li><a href="https://github.com/git-guides/git-cheat-sheet" target="_blank">Git Cheat Sheet</a> — Quick reference for common Git commands.</li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Git Best Practices Guide. Built for modern teams.</p>
+            <p>Written by Titus T. Bangura, Diploma Software Student</p>
+        </div>
+    </footer>
+    <script src="Essential-javaScript.js" defer></script>
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18,15 12,9 6,15"></polyline>
+        </svg>
+    </button>
+</body>
+</html>
