@@ -1,25 +1,1127 @@
-function downloadHighQualityPDF() {
-    // Hide controls
-    const controls = document.getElementById('controls');
-    const originalDisplay = controls.style.display;
-    try {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Titus T. Bangura - Resume</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="resume-style.css">
+  <!-- Advanced PDF Generation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- HTML2Canvas for High-Quality Image Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <!-- Custom Dropdown Styles -->
+  <style>
+    /* Clean Dropdown Styling */
+    .print-controls .dropdown-menu {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      animation: dropdownFade 0.2s ease-out;
+    }
+    
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .print-controls .dropdown-item {
+      border-radius: 8px;
+      margin: 2px 8px;
+      transition: all 0.2s ease;
+      border: none;
+      background: none;
+      width: calc(100% - 16px);
+    }
+    
+    .print-controls .dropdown-item:hover {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .print-controls .dropdown-item:active {
+      transform: translateX(2px);
+    }
+    
+    .print-controls .dropdown-header {
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    
+    .print-controls .dropdown-divider {
+      margin: 8px 0;
+      opacity: 0.3;
+    }
+    
+    /* Main dropdown button styling */
+    .print-controls .btn {
+      border-radius: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .print-controls .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .print-controls .btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Position the dropdown */
+    .print-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .print-controls {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .print-controls .btn {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+      
+      .print-controls .dropdown-menu {
+        min-width: 260px !important;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Clean Dropdown Controls -->
+  <div class="print-controls d-print-none">
+    <div class="dropdown">
+      <button class="btn btn-dark btn-lg shadow dropdown-toggle" type="button" id="resumeControlsDropdown" 
+              data-bs-toggle="dropdown" aria-expanded="false" 
+              title="Resume Controls - Download, Print & More">
+        <i class="fa-solid fa-gear me-2"></i>Resume Controls
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="resumeControlsDropdown" 
+          style="min-width: 280px; border-radius: 12px;">
+        
+        <!-- Header -->
+        <li>
+          <h6 class="dropdown-header text-primary">
+            <i class="fa-solid fa-lightbulb me-2"></i>Download & Print Options
+          </h6>
+        </li>
+        
+        <!-- Main Actions -->
+        <li>
+          <button class="dropdown-item py-2" onclick="downloadHighQualityPDF()">
+            <i class="fa-solid fa-file-pdf text-danger me-3"></i>
+            <strong>Download PDF</strong>
+            <small class="text-muted d-block">Perfect quality copy</small>
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item py-2" onclick="downloadAsImage()" 
+                  title="Save resume as high-quality PNG image">
+            <i class="fa-solid fa-image text-primary me-3"></i>
+            <strong>Save as Image</strong>
+            <small class="text-muted d-block">Capture exactly as you see it</small>
+          </button>
+        </li>
+        
+        <li><hr class="dropdown-divider"></li>
+        
+        <!-- Layout Options -->
+        <li>
+          <h6 class="dropdown-header text-warning">
+            <i class="fa-solid fa-sliders me-2"></i>Layout Options
+          </h6>
+        </li>
+        <li>
+          <button class="dropdown-item py-2" onclick="toggleSinglePageOptimization()" id="singlePageDropdownBtn">
+            <i class="fa-solid fa-compress text-warning me-3"></i>
+            <strong>Single Page Mode</strong>
+            <small class="text-muted d-block">Optimize for A4 printing</small>
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item py-2" onclick="optimizeForPrint()" id="optimizeDropdownBtn">
+            <i class="fa-solid fa-magic-wand-sparkles text-info me-3"></i>
+            <strong>Optimize Layout</strong>
+            <small class="text-muted d-block">Enhance print quality</small>
+          </button>
+        </li>
+        
+        <li><hr class="dropdown-divider"></li>
+        
+        <!-- Navigation -->
+        <li>
+          <a href="index.html" class="dropdown-item py-2">
+            <i class="fa-solid fa-arrow-left text-secondary me-3"></i>
+            <strong>Back to Portfolio</strong>
+          </a>
+        </li>
+        
+        <!-- Quick Tip -->
+        <li>
+          <div class="dropdown-item-text py-2 bg-light rounded mx-2 mt-2">
+            <small class="text-muted">
+              <i class="fa-solid fa-info-circle me-1"></i>
+              <strong>Tip:</strong> Use Single Page Mode + Download PDF for perfect A4 fit!
+            </small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Loading Overlay for PDF Generation -->
+  <div id="pdf-loading" class="pdf-loading-overlay" style="display: none;">
+    <div class="pdf-loading-content">
+      <div class="pdf-spinner"></div>
+      <h4>Generating Perfect PDF...</h4>
+      <p>Please wait while we create your high-quality resume</p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-container">
+    <!-- Header Section -->
+    <header class="resume-header">
+      <div class="header-content">
+        <div class="profile-section">
+          <div class="profile-image">
+            <img src="WhatsApp_Image_2025-05-22_at_09.29.08_70576e04-removebg-preview.png" alt="Titus T. Bangura"
+              class="profile-img">
+            <div class="profile-overlay"></div>
+          </div>
+          <div class="profile-info">
+            <h1 class="name">Titus T. Bangura</h1>
+            <h2 class="title">Diploma Software Engineer</h2>
+            <p class="tagline">Passionate Full-Stack Developer • Problem Solver • Tech Enthusiast</p>
+          </div>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>tbanguratitus@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+232 88 887 8560</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Freetown, Sierra Leone</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-brands fa-github"></i>
+            <span>github.com/titustbangura</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>linkedin.com/in/titustbangura</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="resume-main">
+      <div class="row g-4">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+          <!-- Professional Summary -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-user-tie section-icon"></i>
+              Professional Summary
+            </h3>
+            <div class="section-content">
+              <p class="summary-text">
+                Passionate and dedicated Diploma Software Engineering student with 3+ years of hands-on experience in
+                full-stack web development.
+                Specialized in modern web technologies including React, PHP, Python, and mobile app development.
+                Proven track record of delivering 15+ successful projects for clients across Sierra Leone, with a focus
+                on creating
+                responsive, user-friendly applications that solve real-world problems.
+              </p>
+              <div class="highlights">
+                <div class="highlight-item">
+                  <span class="highlight-number">15+</span>
+                  <span class="highlight-label">Projects Completed</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-number">5+</span>
+                  <span class="highlight-label">Happy Clients</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-number">8+</span>
+                  <span class="highlight-label">Technologies</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Experience -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-briefcase section-icon"></i>
+              Professional Experience
+            </h3>
+            <div class="section-content">
+              <div class="experience-item">
+                <div class="experience-header">
+                  <h4 class="job-title">Freelance Web Developer</h4>
+                  <span class="job-period">2023 - Present</span>
+                </div>
+                <div class="job-company">Self-Employed • Freetown, Sierra Leone</div>
+                <ul class="job-responsibilities">
+                  <li>Developed and delivered 15+ custom websites and web applications for small businesses and startups
+                  </li>
+                  <li>Specialized in responsive design using HTML5, CSS3, JavaScript, and Bootstrap framework</li>
+                  <li>Built full-stack applications using React.js, PHP, Python (Flask), and MySQL</li>
+                  <li>Implemented modern UI/UX practices resulting in 40% improved user engagement</li>
+                  <li>Managed complete project lifecycle from requirements gathering to deployment and maintenance</li>
+                  <li>Achieved 100% client satisfaction rate with timely delivery and ongoing support</li>
+                </ul>
+                <div class="tech-tags">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">PHP</span>
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">MySQL</span>
+                  <span class="tech-tag">Bootstrap</span>
+                </div>
+              </div>
+
+              <div class="experience-item">
+                <div class="experience-header">
+                  <h4 class="job-title">Frontend Developer Intern</h4>
+                  <span class="job-period">Summer 2023</span>
+                </div>
+                <div class="job-company">Local Tech Company • Freetown, Sierra Leone</div>
+                <ul class="job-responsibilities">
+                  <li>Collaborated with senior developers on client projects using agile development methodologies</li>
+                  <li>Developed responsive web interfaces using HTML, CSS, JavaScript, and React</li>
+                  <li>Participated in code reviews and learned industry best practices for clean, maintainable code</li>
+                  <li>Contributed to team projects and gained experience in version control using Git</li>
+                  <li>Assisted in debugging and testing web applications across multiple browsers and devices</li>
+                </ul>
+                <div class="tech-tags">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Git</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Projects -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-code section-icon"></i>
+              Key Projects
+            </h3>
+            <div class="section-content">
+              <div class="project-item">
+                <div class="project-header">
+                  <h4 class="project-title">QR Code Generator & Scanner</h4>
+                  <div class="project-links">
+                    <a href="../qr-generator.html" class="project-link"><i class="fa-solid fa-external-link"></i></a>
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i></a>
+                  </div>
+                </div>
+                <p class="project-description">
+                  Advanced QR code generation and scanning web application with real-time camera scanning, 
+                  multiple format support, download functionality, and fully responsive mobile-first design.
+                </p>
+                <div class="tech-tags">
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">HTML5 Canvas</span>
+                  <span class="tech-tag">Camera API</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">Responsive Design</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4 class="project-title">Real-Time Weather Application</h4>
+                  <div class="project-links">
+                    <a href="../weather-app.html" class="project-link"><i class="fa-solid fa-external-link"></i></a>
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i></a>
+                  </div>
+                </div>
+                <p class="project-description">
+                  Comprehensive weather application with real-time data from WeatherAPI.com, featuring global city search, 
+                  5-day forecasts, geolocation support, recent search history, and responsive design with smooth animations.
+                </p>
+                <div class="tech-tags">
+                  <span class="tech-tag">JavaScript ES6+</span>
+                  <span class="tech-tag">REST API</span>
+                  <span class="tech-tag">Geolocation API</span>
+                  <span class="tech-tag">Local Storage</span>
+                  <span class="tech-tag">CSS Animations</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4 class="project-title">E-commerce Website</h4>
+                  <div class="project-links">
+                    <a href="#" class="project-link"><i class="fa-solid fa-external-link"></i></a>
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i></a>
+                  </div>
+                </div>
+                <p class="project-description">
+                  Full-featured online store with user authentication, product search, shopping cart, and admin panel.
+                  Built with React frontend, PHP backend, and MySQL database.
+                </p>
+                <div class="tech-tags">
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">PHP</span>
+                  <span class="tech-tag">MySQL</span>
+                  <span class="tech-tag">Bootstrap</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4 class="project-title">Student Management System</h4>
+                  <div class="project-links">
+                    <a href="#" class="project-link"><i class="fa-solid fa-external-link"></i></a>
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i></a>
+                  </div>
+                </div>
+                <p class="project-description">
+                  Web application for managing student data, attendance tracking, and grade management.
+                  Features responsive design and real-time data updates.
+                </p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Flask</span>
+                  <span class="tech-tag">SQLite</span>
+                  <span class="tech-tag">Bootstrap</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4 class="project-title">Mobile Todo Application</h4>
+                  <div class="project-links">
+                    <a href="#" class="project-link"><i class="fa-solid fa-external-link"></i></a>
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i></a>
+                  </div>
+                </div>
+                <p class="project-description">
+                  Cross-platform mobile app for task management with real-time synchronization,
+                  offline support, and intuitive user interface.
+                </p>
+                <div class="tech-tags">
+                  <span class="tech-tag">React Native</span>
+                  <span class="tech-tag">Firebase</span>
+                  <span class="tech-tag">JavaScript</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4">
+          <!-- Technical Skills -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-code section-icon"></i>
+              Technical Skills
+            </h3>
+            <div class="section-content">
+              <div class="skill-category">
+                <h5 class="skill-category-title">Frontend Development</h5>
+                <div class="skills-list">
+                  <div class="skill-item">
+                    <span class="skill-name">HTML5 & CSS3</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">JavaScript</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">React.js</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">Bootstrap</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h5 class="skill-category-title">Backend & Database</h5>
+                <div class="skills-list">
+                  <div class="skill-item">
+                    <span class="skill-name">Python</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">PHP</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">MySQL</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <span class="skill-name">Git & GitHub</span>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h5 class="skill-category-title">Tools & Technologies</h5>
+                <div class="tech-icons">
+                  <div class="tech-icon" title="HTML5"><i class="fa-brands fa-html5"></i></div>
+                  <div class="tech-icon" title="CSS3"><i class="fa-brands fa-css3-alt"></i></div>
+                  <div class="tech-icon" title="JavaScript"><i class="fa-brands fa-js"></i></div>
+                  <div class="tech-icon" title="React"><i class="fa-brands fa-react"></i></div>
+                  <div class="tech-icon" title="PHP"><i class="fa-brands fa-php"></i></div>
+                  <div class="tech-icon" title="Python"><i class="fa-brands fa-python"></i></div>
+                  <div class="tech-icon" title="Git"><i class="fa-brands fa-git-alt"></i></div>
+                  <div class="tech-icon" title="MySQL"><i class="fa-solid fa-database"></i></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Education -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-graduation-cap section-icon"></i>
+              Education
+            </h3>
+            <div class="section-content">
+              <div class="education-item">
+                <h4 class="degree-title">Diploma in Software Engineering</h4>
+                <div class="school-name">Sky Visione College</div>
+                <div class="education-period">2022 - 2025</div>
+                <div class="education-location">Freetown, Sierra Leone</div>
+                <p class="education-description">
+                  Comprehensive program covering full-stack development, software engineering principles,
+                  database design, and modern web technologies.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Certifications -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-certificate section-icon"></i>
+              Certifications
+            </h3>
+            <div class="section-content">
+              <div class="cert-item">
+                <h5 class="cert-title">Meta Front-End Developer</h5>
+                <div class="cert-issuer">Coursera • 2024</div>
+              </div>
+              <div class="cert-item">
+                <h5 class="cert-title">Python for Everybody</h5>
+                <div class="cert-issuer">University of Michigan • 2023</div>
+              </div>
+              <div class="cert-item">
+                <h5 class="cert-title">JavaScript Algorithms and Data Structures</h5>
+                <div class="cert-issuer">freeCodeCamp • 2023</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Languages -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-language section-icon"></i>
+              Languages
+            </h3>
+            <div class="section-content">
+              <div class="language-item">
+                <span class="language-name">English</span>
+                <span class="language-level">Fluent</span>
+              </div>
+              <div class="language-item">
+                <span class="language-name">Krio</span>
+                <span class="language-level">Native</span>
+              </div>
+              <div class="language-item">
+                <span class="language-name">Temne</span>
+                <span class="language-level">Conversational</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Interests -->
+          <section class="resume-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-heart section-icon"></i>
+              Interests
+            </h3>
+            <div class="section-content">
+              <div class="interests-grid">
+                <div class="interest-item">
+                  <i class="fa-solid fa-code"></i>
+                  <span>Open Source</span>
+                </div>
+                <div class="interest-item">
+                  <i class="fa-solid fa-mobile-alt"></i>
+                  <span>Mobile Dev</span>
+                </div>
+                <div class="interest-item">
+                  <i class="fa-solid fa-robot"></i>
+                  <span>AI/ML</span>
+                </div>
+                <div class="interest-item">
+                  <i class="fa-solid fa-gamepad"></i>
+                  <span>Gaming</span>
+                </div>
+                <div class="interest-item">
+                  <i class="fa-solid fa-book"></i>
+                  <span>Learning</span>
+                </div>
+                <div class="interest-item">
+                  <i class="fa-solid fa-users"></i>
+                  <span>Mentoring</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="resume-footer">
+      <div class="footer-content">
+        <p class="footer-text">
+          <strong>References available upon request</strong> •
+          Portfolio: <a href="index.html">View Online Portfolio</a> •
+          Last Updated: September 2025
+        </p>
+        <div class="qr-code-section">
+          <div class="qr-placeholder">
+            <img src="../qr-code.png" alt="QR Code for Portfolio" class="qr-code-image">
+            <span>Scan for Portfolio</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ULTRA ADVANCED PDF & IMAGE GENERATION
+    // Perfect quality reproduction of your resume
+
+    let isPrintOptimized = false;
+
+    // 🎯 MAIN FUNCTION: Download Perfect Quality PDF
+    async function downloadHighQualityPDF() {
+      showLoadingOverlay(true);
+
+      try {
+        // Hide controls temporarily
+        const controls = document.querySelector('.print-controls');
         controls.style.display = 'none';
 
-        // Set up jsPDF and html2pdf parameters
-        const pdfOptions = {
-            margin: 0,
-            filename: 'output.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compressPDF: true }
+        // AUTOMATICALLY OPTIMIZE FOR SINGLE PAGE
+        optimizeForSinglePage(true);
+        await new Promise(resolve => setTimeout(resolve, 300)); // Wait for layout to settle
+
+        // Get the resume container
+        const element = document.querySelector('.resume-container');
+
+        // Configure PDF options for PERFECT quality
+        const options = {
+          margin: [0.3, 0.3, 0.3, 0.3], // Small margins in inches
+          filename: 'Titus_Bangura_Resume.pdf',
+          image: {
+            type: 'jpeg',
+            quality: 1.0 // Maximum quality
+          },
+          html2canvas: {
+            scale: 3, // High resolution (3x scale)
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            letterRendering: true,
+            logging: false,
+            width: 1200, // Fixed width for consistency
+            height: element.scrollHeight,
+            scrollX: 0,
+            scrollY: 0
+          },
+          jsPDF: {
+            unit: 'in',
+            format: 'a4',
+            orientation: 'portrait',
+            precision: 16 // High precision
+          }
         };
 
-        // Generate the PDF
-        html2pdf().from(document.body).set(pdfOptions).save();
-    } catch (error) {
-        console.error('Error generating PDF:', error);
-    } finally {
-        // Restore controls and settings
-        controls.style.display = originalDisplay;
+        // Generate and download PDF
+        await html2pdf().set(options).from(element).save();
+
+        // Show controls again
+        controls.style.display = 'flex';
+
+        // RESTORE NORMAL LAYOUT
         optimizeForSinglePage(false);
+
+        showNotification('✅ Perfect PDF downloaded successfully!', 'success');
+
+      } catch (error) {
+        console.error('PDF generation error:', error);
+        showNotification('❌ PDF generation failed. Please try again.', 'danger');
+
+        // Show controls again
+        const controls = document.querySelector('.print-controls');
+        controls.style.display = 'flex';
+
+        // RESTORE NORMAL LAYOUT
+        optimizeForSinglePage(false);
+      }
+
+      showLoadingOverlay(false);
     }
-}
+
+    // 🖼️ FUNCTION: Download as High-Quality Image (CAPTURE AS YOU SEE IT)
+    async function downloadAsImage() {
+      showLoadingOverlay(true);
+
+      try {
+        // Hide controls temporarily (but keep current layout exactly as user sees it)
+        const controls = document.querySelector('.print-controls');
+        const originalDisplay = controls.style.display;
+        controls.style.display = 'none';
+
+        // Get the resume container (exactly as currently displayed)
+        const element = document.querySelector('.resume-container');
+
+        // Wait a moment for controls to hide
+        await new Promise(resolve => setTimeout(resolve, 150));
+
+        // Capture the resume EXACTLY as the user sees it
+        const canvas = await html2canvas(element, {
+          scale: 3, // High resolution but stable
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: '#ffffff',
+          width: element.clientWidth, // Use actual display width
+          height: element.clientHeight, // Use actual display height
+          scrollX: 0,
+          scrollY: 0,
+          letterRendering: true,
+          logging: false,
+          removeContainer: false, // Keep container for accurate capture
+          imageTimeout: 5000,
+          onclone: function (clonedDoc) {
+            // Make sure the cloned version matches what user sees
+            const clonedElement = clonedDoc.querySelector('.resume-container');
+            const originalElement = document.querySelector('.resume-container');
+            
+            if (clonedElement && originalElement) {
+              // Copy computed styles to ensure exact match
+              const computedStyle = window.getComputedStyle(originalElement);
+              clonedElement.style.cssText = computedStyle.cssText;
+              
+              // Ensure QR code image is visible
+              const qrImage = clonedDoc.querySelector('.qr-code-image');
+              if (qrImage) {
+                qrImage.style.display = 'block';
+                qrImage.style.visibility = 'visible';
+              }
+            }
+          }
+        });
+
+        // Convert to high-quality PNG
+        const dataURL = canvas.toDataURL('image/png', 1.0);
+
+        // Create and trigger download
+        const link = document.createElement('a');
+        link.download = 'Titus_Bangura_Resume.png';
+        link.href = dataURL;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Restore controls
+        controls.style.display = originalDisplay;
+
+        showNotification('✅ Resume image captured exactly as you see it!', 'success');
+
+      } catch (error) {
+        console.error('Image generation error:', error);
+        
+        // Restore controls
+        const controls = document.querySelector('.print-controls');
+        if (controls) controls.style.display = 'flex';
+
+        // Try simplified fallback
+        try {
+          await downloadAsImageSimple();
+        } catch (fallbackError) {
+          showNotification('❌ Image capture failed. Please try the PDF option instead.', 'danger');
+        }
+      }
+
+      showLoadingOverlay(false);
+    }
+
+    // 🔄 SIMPLE FALLBACK: Basic Image Capture
+    async function downloadAsImageSimple() {
+      try {
+        showNotification('📸 Using simple capture method...', 'info');
+
+        // Hide controls
+        const controls = document.querySelector('.print-controls');
+        controls.style.display = 'none';
+
+        // Wait for layout to settle
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Get element exactly as displayed
+        const element = document.querySelector('.resume-container');
+
+        // Use basic html2canvas with minimal options for maximum compatibility
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: false,
+          allowTaint: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          width: element.scrollWidth,
+          height: element.scrollHeight
+        });
+
+        // Create download
+        const dataURL = canvas.toDataURL('image/png', 0.95);
+        const link = document.createElement('a');
+        link.download = 'Titus_Bangura_Resume_Simple.png';
+        link.href = dataURL;
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Restore controls
+        controls.style.display = 'flex';
+
+        showNotification('✅ Resume saved using simple method!', 'success');
+
+      } catch (error) {
+        showNotification('❌ All image methods failed. Please use PDF download.', 'danger');
+        console.error('Simple image error:', error);
+        
+        // Restore controls
+        const controls = document.querySelector('.print-controls');
+        if (controls) controls.style.display = 'flex';
+      }
+    }
+
+    // Function to show/hide loading overlay
+    function showLoadingOverlay(show) {
+      const overlay = document.getElementById('pdf-loading');
+      overlay.style.display = show ? 'flex' : 'none';
+    }
+
+    // Legacy print function (fallback)
+    function printToPDF() {
+      // AUTOMATICALLY OPTIMIZE FOR PRINT
+      optimizeForSinglePage(true);
+
+      const instructions = `
+        📄 BROWSER PDF INSTRUCTIONS:
+        
+        1. In the print dialog:
+           • Choose "Save as PDF" as destination
+           • Set margins to "Minimum"
+           • Enable "Background graphics" ✅
+           • Choose "A4" paper size
+           • Set scale to "100%"
+        2. Click "Save"
+        
+        💡 TIP: Use "Download PDF (Perfect Copy)" for best quality!
+      `;
+
+      if (confirm(instructions + "\n\nClick OK to proceed.")) {
+        setTimeout(() => {
+          window.print();
+          // Restore layout after a delay
+          setTimeout(() => optimizeForSinglePage(false), 2000);
+        }, 500);
+      } else {
+        // User cancelled, restore layout
+        optimizeForSinglePage(false);
+      }
+    }
+
+
+    // 🎯 NEW: MANUAL SINGLE PAGE TOGGLE
+    let isSinglePageMode = false;
+
+    function toggleSinglePageOptimization() {
+      // Update both button locations (if they exist)
+      const btn = document.getElementById('singlePageBtn');
+      const dropdownBtn = document.getElementById('singlePageDropdownBtn');
+
+      if (!isSinglePageMode) {
+        // Enable single page mode
+        optimizeForSinglePage(true);
+        
+        // Update old button if it exists
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-expand me-2"></i>Normal Mode';
+          btn.className = 'btn btn-dark btn-lg shadow me-2';
+        }
+        
+        // Update dropdown button
+        if (dropdownBtn) {
+          dropdownBtn.innerHTML = `
+            <i class="fa-solid fa-expand text-dark me-3"></i>
+            <strong>Normal Mode</strong>
+            <small class="text-muted d-block">Restore regular layout</small>
+          `;
+        }
+        
+        isSinglePageMode = true;
+        showNotification('📄 Single Page Mode: Resume optimized to fit perfectly on one A4 page!', 'success');
+      } else {
+        // Disable single page mode
+        optimizeForSinglePage(false);
+        
+        // Update old button if it exists
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-compress me-2"></i>Single Page Mode';
+          btn.className = 'btn btn-warning btn-lg shadow me-2';
+        }
+        
+        // Update dropdown button
+        if (dropdownBtn) {
+          dropdownBtn.innerHTML = `
+            <i class="fa-solid fa-compress text-warning me-3"></i>
+            <strong>Single Page Mode</strong>
+            <small class="text-muted d-block">Optimize for A4 printing</small>
+          `;
+        }
+        
+        isSinglePageMode = false;
+        showNotification('📖 Normal Mode: Resume layout restored to regular view', 'info');
+      }
+    }
+
+    // 🎯 NEW: AUTOMATIC SINGLE PAGE OPTIMIZATION
+    function optimizeForSinglePage(enable) {
+      const body = document.body;
+
+      if (enable) {
+        // Apply ultra-compact single page optimization
+        body.classList.add('single-page-optimized');
+        console.log('✅ Single-page optimization enabled');
+      } else {
+        // Remove single page optimization
+        body.classList.remove('single-page-optimized');
+        console.log('🔄 Single-page optimization disabled');
+      }
+    }
+
+    // Function to optimize layout for printing
+    function optimizeForPrint() {
+      const body = document.body;
+      const btn = document.getElementById('optimizeBtn');
+      const dropdownBtn = document.getElementById('optimizeDropdownBtn');
+
+      if (!isPrintOptimized) {
+        // Apply print optimizations
+        body.classList.add('print-optimized');
+        
+        // Update old button if it exists
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-undo me-2"></i>Reset Layout';
+          btn.className = 'btn btn-info btn-lg shadow me-2';
+        }
+        
+        // Update dropdown button
+        if (dropdownBtn) {
+          dropdownBtn.innerHTML = `
+            <i class="fa-solid fa-undo text-info me-3"></i>
+            <strong>Reset Layout</strong>
+            <small class="text-muted d-block">Restore normal view</small>
+          `;
+        }
+        
+        isPrintOptimized = true;
+        showNotification('✅ Layout optimized for better PDF quality!', 'success');
+      } else {
+        // Remove print optimizations
+        body.classList.remove('print-optimized');
+        
+        // Update old button if it exists
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-magic-wand-sparkles me-2"></i>Optimize Layout';
+          btn.className = 'btn btn-warning btn-lg shadow me-2';
+        }
+        
+        // Update dropdown button
+        if (dropdownBtn) {
+          dropdownBtn.innerHTML = `
+            <i class="fa-solid fa-magic-wand-sparkles text-info me-3"></i>
+            <strong>Optimize Layout</strong>
+            <small class="text-muted d-block">Enhance print quality</small>
+          `;
+        }
+        
+        isPrintOptimized = false;
+        showNotification('🔄 Layout reset to normal view', 'info');
+      }
+    }
+
+    // Function to show notifications
+    function showNotification(message, type) {
+      // Remove existing notifications
+      const existingNotification = document.querySelector('.print-notification');
+      if (existingNotification) {
+        existingNotification.remove();
+      }
+
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `print-notification alert alert-${type} alert-dismissible fade show`;
+      notification.style.cssText = `
+        position: fixed;
+        top: 120px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 350px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        font-weight: 500;
+      `;
+
+      notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      `;
+
+      document.body.appendChild(notification);
+
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 5000);
+    }
+
+    // Enhanced keyboard shortcuts
+    document.addEventListener('keydown', function (e) {
+      // Ctrl+Shift+P for perfect PDF
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
+        e.preventDefault();
+        downloadHighQualityPDF();
+      }
+
+      // Ctrl+Shift+I for image
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        downloadAsImage();
+      }
+
+      // Ctrl+P for browser print
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        printToPDF();
+      }
+    });
+
+    // Page load optimization
+    window.addEventListener('load', function () {
+      // Preload all fonts and images
+      const images = document.querySelectorAll('img');
+      let loadedImages = 0;
+
+      images.forEach(img => {
+        if (img.complete) {
+          loadedImages++;
+        } else {
+          img.onload = () => {
+            loadedImages++;
+            if (loadedImages === images.length) {
+              console.log('All images loaded - Resume ready for PDF generation');
+            }
+          };
+        }
+      });
+
+      // Show ready message
+      setTimeout(() => {
+        showNotification('🚀 Resume loaded! Use "Single Page Mode" for perfect A4 printing', 'info');
+      }, 1000);
+    });
+
+    // Prevent accidental navigation
+    window.addEventListener('beforeunload', function (e) {
+      const overlay = document.getElementById('pdf-loading');
+      if (overlay.style.display === 'flex') {
+        e.preventDefault();
+        e.returnValue = 'PDF generation in progress. Are you sure you want to leave?';
+        return e.returnValue;
+      }
+    });
+  </script>
+</body>
+
+</html>
